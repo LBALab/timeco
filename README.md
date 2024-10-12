@@ -54,7 +54,7 @@ Refer [AUTHORS.md](AUTHORS.md) file for a full list of contributions on this pro
 
 # Copyright
 
-Copyright [2.21]. The intellectual property is currently owned by [2.21].
+The intellectual property is currently owned by Didier Chanfray, SARL.
 
 Originaly developed by Adeline Software International in 1994.
 
