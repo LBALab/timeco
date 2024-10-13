@@ -9,6 +9,9 @@
 #include "renderer.h"
 
 
+#define ENGINE_VERSION "0.0.1"
+
+
 c8 title[64];
 state_t *state;
 
@@ -24,9 +27,19 @@ void display_fps(system_t *system, renderer_t *renderer) {
 }
 
 i32 main(i32 argc, c8 **argv) {
+    printf("TimeCo v%s\n\n", ENGINE_VERSION);
+    printf("(c)2024 TimeCo team. Refer to AUTHORS file for further details.\n");
+    printf("Released under the terms of the GNU GPL license version 2 (or, at your opinion, any later). See COPYING file.\n\n");
+    printf("The intellectual property is currently owned by [2.21].\n");
+    printf("Originaly developed by Adeline Software International in 1994.\n\n");
+
+    // if (config_file.debug)
+    printf("Compiled the %s at %s\n\n", __DATE__, __TIME__);
+
     printf("Initializing...\n");
     state = memory_calloc(sizeof(state_t));
     state_init(state);
+    
     printf("Detecting Game...\n");
     state->game_type = detect_game();
 
