@@ -49,8 +49,10 @@ i32 main(i32 argc, c8 **argv) {
 
     system_t *system = &state->system;
     renderer_t *renderer = &state->renderer;
+    screen_t *screen = &state->screen;
 
-    system_init(system, state->system.title, 640, 480, 4);
+    system_init(system, state->system.title, 640, 480, 1);
+    screen_init(screen, system);
     renderer_init(renderer, system);
     game_init(state);
 
@@ -66,10 +68,12 @@ i32 main(i32 argc, c8 **argv) {
         system_flip(system);
 
         display_fps(system, renderer);
-        system_delay();
+        system_delay(1);
     }
 
     game_release(state);
+    renderer_release(renderer);
+    screen_release(screen);
     system_release(system);
     state_release(state);
 

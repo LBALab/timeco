@@ -65,8 +65,8 @@ inline u32 system_tick() {
     return SDL_GetTicks();
 }
 
-inline void system_delay() {
-    SDL_Delay(1);
+inline void system_delay(u32 ms) {
+    SDL_Delay(ms);
 }
 
 inline void system_set_title(system_t *system, c8 *title) {

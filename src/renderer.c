@@ -23,6 +23,14 @@ void renderer_init(renderer_t *renderer, system_t *system) {
     renderer->triangles = 0;
 }
 
+void renderer_release(renderer_t *renderer) {
+    memory_free(renderer->back_buffer);
+    memory_free(renderer->front_buffer);
+    memory_free(renderer->rendering_buffer);
+    memory_free(renderer->zbuffer);
+    memory_free(renderer->stride_buffer);
+}
+
 void renderer_draw_line(u8 *pixels, i32 w, i32 h, i32 bpp, i32 x0, i32 y0, i32 x1, i32 y1, pixel_colour colour) {
     b8 steep = false;
     if (abs(x0 - x1) < abs(y0 - y1)) {

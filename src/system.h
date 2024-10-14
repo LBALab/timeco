@@ -29,7 +29,7 @@ typedef struct {
 void system_init(system_t *system, c8 *game_title, i32 width, i32 height, i32 bpp);
 void system_events(system_t *system);
 u32 system_tick();
-void system_delay();
+void system_delay(u32 ms);
 void system_set_title(system_t *system, c8 *title);
 void system_blit(system_t *system, u8 *front_buffer);
 void system_flip(system_t *system);

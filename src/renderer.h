@@ -21,6 +21,7 @@ typedef struct {
 
 
 void renderer_init(renderer_t *renderer, system_t *system);
+void renderer_release(renderer_t *renderer);
 
 void renderer_flip_vertically(renderer_t *renderer);
 void renderer_flip(renderer_t *renderer);
