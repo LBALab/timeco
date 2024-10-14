@@ -74,7 +74,7 @@ void hqr_entry_decompress_lz(u8 * dst, u8 * src, i32 decompsize, i32 mode) {
     }
 }
 
-i32 hqr_get_entry(u8 * ptr, i8 *filename, i32 index) {
+i32 hqr_get_entry(u8 * ptr, c8 *filename, i32 index) {
     u32 headerSize;
     u32 offsetToData;
     u32 realSize;
@@ -130,7 +130,7 @@ i32 hqr_get_entry(u8 * ptr, i8 *filename, i32 index) {
     return realSize;
 }
 
-int hqr_get_entry_size(i8 *filename, i32 index) {
+int hqr_get_entry_size(c8 *filename, i32 index) {
     u32 headerSize;
     u32 offsetToData;
     u32 realSize;
@@ -162,7 +162,7 @@ int hqr_get_entry_size(i8 *filename, i32 index) {
     return realSize;
 }
 
-int hqr_get_num_entries(i8 *filename) {
+int hqr_get_num_entries(c8 *filename) {
     u32 headerSize;
 
     if (!filename)
@@ -178,7 +178,7 @@ int hqr_get_num_entries(i8 *filename) {
     return headerSize / 4;
 }
 
-i32 hqr_get_entry_alloc(u8 ** ptr, i8 *filename, i32 index) {
+i32 hqr_get_entry_alloc(u8 ** ptr, c8 *filename, i32 index) {
     i32 size;
     size = hqr_get_entry_size(filename, index);
 

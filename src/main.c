@@ -17,16 +17,6 @@ c8 title[64];
 state_t *state;
 
 
-void display_fps(system_t *system, renderer_t *renderer) {
-    system->timer.frame_count++;
-    if (system->timer.tick - system->timer.last_tick >= 1000) {
-        snprintf(title, 64, "%s - fps: %d [tri: %d]", system->title, system->timer.frame_count, renderer->triangles);
-        system_set_title(system, title);
-        system->timer.frame_count = 0;
-        system->timer.last_tick = system->timer.tick;
-    }
-}
-
 i32 main(i32 argc, c8 **argv) {
     printf("\nTimeCo v%s\n\n", ENGINE_VERSION);
     printf("(c) 2024 TimeCo team. Refer to AUTHORS file for further details.\n");
@@ -64,10 +54,8 @@ i32 main(i32 argc, c8 **argv) {
         game_draw(state);
         game_flip(state);
 
-        system_blit(system, renderer->front_buffer);
+        system_blit(system, screen->front_buffer);
         system_flip(system);
-
-        display_fps(system, renderer);
         system_delay(1);
     }
 

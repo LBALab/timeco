@@ -37,6 +37,25 @@ void system_init(system_t *system, c8 *title, i32 width, i32 height, i32 bpp) {
     SDL_UpdateWindowSurface(system->window);
 }
 
+void system_release(system_t *system) {
+    SDL_DestroyTexture(system->texture);
+    SDL_DestroyRenderer(system->renderer);
+    SDL_DestroyWindow(system->window);
+    SDL_Quit();
+}
+
+inline void system_set_title(system_t *system, c8 *title) {
+    SDL_SetWindowTitle(system->window, title);
+}
+
+inline u32 system_tick() {
+    return SDL_GetTicks();
+}
+
+inline void system_delay(u32 ms) {
+    SDL_Delay(ms);
+}
+
 void system_events(system_t *system) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
@@ -61,18 +80,6 @@ void system_events(system_t *system) {
     }
 }
 
-inline u32 system_tick() {
-    return SDL_GetTicks();
-}
-
-inline void system_delay(u32 ms) {
-    SDL_Delay(ms);
-}
-
-inline void system_set_title(system_t *system, c8 *title) {
-    SDL_SetWindowTitle(system->window, title);
-}
-
 void system_blit(system_t *system, u8 *front_buffer) {
     SDL_RenderClear(system->renderer);
     SDL_UpdateTexture(system->texture, NULL, front_buffer, system->width * system->bpp);
@@ -83,9 +90,8 @@ inline void system_flip(system_t *system) {
     SDL_RenderPresent(system->renderer);
 }
 
-void system_release(system_t *system) {
-    SDL_DestroyTexture(system->texture);
-    SDL_DestroyRenderer(system->renderer);
-    SDL_DestroyWindow(system->window);
-    SDL_Quit();
+void system_set_palette(system_t *system, u8 *palette) {
+    // SDL_Palette *pal = SDL_AllocPalette(256);
+    // SDL_SetPaletteColors(pal, (SDL_Color *)palette, 0, 256);
+    // SDL_SetSurfacePalette(system->surface, pal);
 }

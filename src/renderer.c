@@ -15,8 +15,6 @@ void renderer_init(renderer_t *renderer, system_t *system) {
     renderer->bpp = system->bpp;
 
     renderer->stride_buffer = (u8 *)memory_alloc(width * bpp);
-    renderer->back_buffer = (u8 *)memory_alloc(width * height * bpp);
-    renderer->front_buffer = (u8 *)memory_alloc(width * height * bpp);
     renderer->rendering_buffer = (u8 *)memory_alloc(width * height * bpp);
     renderer->zbuffer = (f32 *)memory_alloc(width * height * sizeof(f32));
 
@@ -24,8 +22,6 @@ void renderer_init(renderer_t *renderer, system_t *system) {
 }
 
 void renderer_release(renderer_t *renderer) {
-    memory_free(renderer->back_buffer);
-    memory_free(renderer->front_buffer);
     memory_free(renderer->rendering_buffer);
     memory_free(renderer->zbuffer);
     memory_free(renderer->stride_buffer);
@@ -77,13 +73,13 @@ inline void renderer_flip_vertically(renderer_t *renderer) {
     }
 }
 
-inline void renderer_flip(renderer_t *renderer) {
+inline void renderer_flip(renderer_t *renderer, u8 *back_buffer) {
     i32 width = renderer->width;
     i32 height = renderer->height;
     i16 bpp = renderer->bpp;
 
     renderer_flip_vertically(renderer);
-    memory_copy(renderer->back_buffer, renderer->rendering_buffer, width * height * bpp);
+    memory_copy(back_buffer, renderer->rendering_buffer, width * height * bpp);
 }
 
 inline void renderer_clear(renderer_t *renderer) {

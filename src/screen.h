@@ -12,6 +12,7 @@ typedef struct {
     i16 bpp;
     u8 *back_buffer;
     u8 *front_buffer;
+    u8 palette[256 * 3];
 } screen_t;
 
 
