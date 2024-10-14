@@ -7,6 +7,7 @@
 #include "game_detection.h"
 #include "system.h"
 #include "renderer.h"
+#include "config.h"
 
 
 #define ENGINE_VERSION "0.0.1"
@@ -33,8 +34,11 @@ i32 main(i32 argc, c8 **argv) {
     printf("The intellectual property is currently owned by [2.21].\n");
     printf("Originaly developed by Adeline Software International in 1994.\n\n");
 
-    // if (config_file.debug)
-    printf("Compiled the %s at %s\n\n", __DATE__, __TIME__);
+    config_init();
+
+    if (config_file.debug) {
+        printf("Compiled the %s at %s\n\n", __DATE__, __TIME__);
+    }
 
     printf("Initializing...\n");
     state = memory_calloc(sizeof(state_t));

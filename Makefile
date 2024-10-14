@@ -23,8 +23,11 @@ sdl:
 	cp $(SDL_BIN)/libSDL3.dylib $(BIN)
 	cp $(SDL_BIN)/libSDL3.a $(BIN)
 
-run:
-	$(BIN)/timeco
+install:
+	cp $(BIN)/timeco $(BIN)/us
+
+run: install
+	$(BIN)/us/timeco
 
 clean-all:
 	find bin ! -name 'src' ! -name 'util' -type d -maxdepth 1 -mindepth 1 -exec rm -rf {} +
