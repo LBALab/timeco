@@ -12,7 +12,7 @@
 #define DEFAULT_FRAMES_PER_SECOND 20;
 
 
-const c8* CONFIG_FILENAME = "bin/us/timeco.def";
+const c8* CONFIG_FILENAME = "timeco.def";
 
 c8 CFGList[][22] = {
     "FullScreen:",

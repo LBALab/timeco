@@ -28,8 +28,8 @@ void display_fps(system_t *system, renderer_t *renderer) {
 }
 
 i32 main(i32 argc, c8 **argv) {
-    printf("TimeCo v%s\n\n", ENGINE_VERSION);
-    printf("(c)2024 TimeCo team. Refer to AUTHORS file for further details.\n");
+    printf("\nTimeCo v%s\n\n", ENGINE_VERSION);
+    printf("(c) 2024 TimeCo team. Refer to AUTHORS file for further details.\n");
     printf("Released under the terms of the GNU GPL license version 2 (or, at your opinion, any later). See COPYING file.\n\n");
     printf("The intellectual property is currently owned by [2.21].\n");
     printf("Originaly developed by Adeline Software International in 1994.\n\n");
@@ -50,7 +50,7 @@ i32 main(i32 argc, c8 **argv) {
     system_t *system = &state->system;
     renderer_t *renderer = &state->renderer;
 
-    system_init(system, state->system.title, 800, 600, 4);
+    system_init(system, state->system.title, 640, 480, 4);
     renderer_init(renderer, system);
     game_init(state);
 
