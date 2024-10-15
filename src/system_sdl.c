@@ -102,6 +102,11 @@ inline void system_flip(system_t *system) {
 }
 
 void system_set_palette(system_t *system, u8 *palette) {
-    SDL_SetPaletteColors(system->palette, (SDL_Color *)palette, 0, 256);
+    // SDL_SetPaletteColors(system->palette, (SDL_Color *)palette, 0, 256);
+    for (i32 i = 0; i < 256; i++) {
+        system->palette->colors[i].r = palette[i * 3 + 0];
+        system->palette->colors[i].g = palette[i * 3 + 1];
+        system->palette->colors[i].b = palette[i * 3 + 2];
+    }
     SDL_SetSurfacePalette(system->surface, system->palette);
 }

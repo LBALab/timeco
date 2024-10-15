@@ -3,6 +3,7 @@
 #include "screen.h"
 #include "common.h"
 #include "state.h"
+#include "hqr.h"
 
 
 void screen_init(screen_t *screen, system_t *system) {
@@ -26,4 +27,26 @@ inline void screen_flip(screen_t *screen) {
 
 inline void screen_clear(screen_t *screen) {
     memset(screen->front_buffer, 0, screen->width * screen->height * screen->bpp * sizeof(u8));
+}
+
+void screen_image(screen_t *screen, u32 index, u32 delay, i32 fade_in) {
+    if (!hqr_get_entry(screen->palette, "RESSOURC.HQR", index)) {
+        printf("Error: Couldn't load palette %d\n", index);
+    }
+    if (!hqr_get_entry(screen->back_buffer, "RESSOURC.HQR", index + 3)) { // +3 High Quality Resource 640x480
+        printf("Error: Couldn't load image %d\n", index);
+    }
+
+    if (fade_in) {
+        // fade to pal
+    } else {
+        screen_flip(screen);
+        system_set_palette(&state->system,screen->palette);
+    }
+
+    system_blit(&state->system);
+    system_flip(&state->system);
+    
+    system_delay(delay);
+    // fade to black
 }

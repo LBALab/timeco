@@ -21,3 +21,5 @@ void screen_release(screen_t *screen);
 
 void screen_flip(screen_t *screen);
 void screen_clear(screen_t *screen);
+
+void screen_image(screen_t *screen, u32 index, u32 delay, i32 fade_in);
