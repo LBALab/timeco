@@ -3,6 +3,7 @@
 
 #include "../../common.h"
 
-void draw_text(u8* front_buffer, i32 x, i32 y, char *str);
+void debug_set_colour(u8 colour);
+void debug_draw_text(u8* screen_buffer, i32 x, i32 y, char *str);
 
 #endif

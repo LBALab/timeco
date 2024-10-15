@@ -11,8 +11,8 @@ void screen_init(screen_t *screen, system_t *system) {
     screen->height = system->height;
     screen->bpp = system->bpp;
 
-    screen->back_buffer = (u8 *)memory_alloc(screen->width * screen->height * screen->bpp);
-    screen->front_buffer = (u8 *)memory_alloc(screen->width * screen->height * screen->bpp);
+    screen->back_buffer = (u8 *)memory_alloc(screen->width * screen->height * screen->bpp * sizeof(u8));
+    screen->front_buffer = (u8 *)memory_alloc(screen->width * screen->height * screen->bpp * sizeof(u8));
 }
 
 void screen_release(screen_t *screen) {

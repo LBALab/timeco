@@ -20,6 +20,8 @@ typedef struct {
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
+    SDL_Surface *surface;
+    SDL_Palette *palette;
     i32 actions[256];
     f32 motion_x;
     f32 motion_y;
@@ -34,6 +36,7 @@ u32 system_tick();
 void system_delay(u32 ms);
 void system_events(system_t *system);
 
-void system_blit(system_t *system, u8 *front_buffer);
+void system_create_surface(system_t *system, u8 *front_buffer);
+void system_blit(system_t *system);
 void system_flip(system_t *system);
 void system_set_palette(system_t *system, u8 *palette);

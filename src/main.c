@@ -43,7 +43,9 @@ i32 main(i32 argc, c8 **argv) {
 
     system_init(system, state->system.title, 640, 480, 1);
     screen_init(screen, system);
+    system_create_surface(system, screen->front_buffer);
     renderer_init(renderer, system);
+    
     game_init(state);
 
     while(!system->quit) {
@@ -52,9 +54,8 @@ i32 main(i32 argc, c8 **argv) {
 
         game_update(state);
         game_draw(state);
-        game_flip(state);
 
-        system_blit(system, screen->front_buffer);
+        system_blit(system);
         system_flip(system);
         system_delay(1);
     }

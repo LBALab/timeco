@@ -28,7 +28,7 @@ void system_init(system_t *system, c8 *title, i32 width, i32 height, i32 bpp) {
 
     system->texture = SDL_CreateTexture(
         system->renderer,
-        SDL_PIXELFORMAT_RGBA8888,
+        SDL_PIXELFORMAT_RGBA8888, // SDL_PIXELFORMAT_INDEX8
         SDL_TEXTUREACCESS_STATIC,
         width,
         height
@@ -80,9 +80,20 @@ void system_events(system_t *system) {
     }
 }
 
-void system_blit(system_t *system, u8 *front_buffer) {
+void system_create_surface(system_t *system, u8 *front_buffer) {
+    system->surface = SDL_CreateSurfaceFrom(
+        system->width,
+        system->height,
+        SDL_PIXELFORMAT_INDEX8,
+        front_buffer,
+        system->width * system->bpp
+    );
+    system->palette = SDL_CreatePalette(256);
+}
+
+void system_blit(system_t *system) {
     SDL_RenderClear(system->renderer);
-    SDL_UpdateTexture(system->texture, NULL, front_buffer, system->width * system->bpp);
+    system->texture = SDL_CreateTextureFromSurface(system->renderer, system->surface);
     SDL_RenderTexture(system->renderer, system->texture, NULL, NULL);
 }
 
@@ -91,7 +102,6 @@ inline void system_flip(system_t *system) {
 }
 
 void system_set_palette(system_t *system, u8 *palette) {
-    // SDL_Palette *pal = SDL_AllocPalette(256);
-    // SDL_SetPaletteColors(pal, (SDL_Color *)palette, 0, 256);
-    // SDL_SetSurfacePalette(system->surface, pal);
+    SDL_SetPaletteColors(system->palette, (SDL_Color *)palette, 0, 256);
+    SDL_SetSurfacePalette(system->surface, system->palette);
 }

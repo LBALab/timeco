@@ -264,14 +264,19 @@ u8 Font8x8[256*8] = {
     0, 0, 0, 0, 0, 0, 0, 0
 };
 
-void draw_text(u8* screen_buffer, i32 x, i32 y, char *str)
+void debug_set_colour(u8 colour)
+{
+    text_colour = colour;
+}
+
+void debug_draw_text(u8* screen_buffer, i32 x, i32 y, char *str)
 {
     u8 character;
     u8 line;
     i32 mask;
     u8 *ptr;
     u8 *font;
-    u8 *buffer = (u8 *)screen_buffer + (640 * y) + x + font_size;
+    u8 *buffer = (u8 *)screen_buffer + (640 * y) + x;
 
     if (!str) {
         return;
