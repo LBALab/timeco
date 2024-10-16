@@ -2,8 +2,6 @@
 
 #include "lib/common.h"
 
-#define FPS_LIMIT 60
-
 #define DEFAULT_WIDTH 640
 #define DEFAULT_HEIGHT 480
 

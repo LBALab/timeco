@@ -132,9 +132,6 @@ void config_init() {
         }
     }
 
-    if (!config_file.fps)
-        config_file.fps = DEFAULT_FRAMES_PER_SECOND;
-
     config_file.debug = 1;
 
     fclose(fd);

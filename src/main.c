@@ -13,6 +13,9 @@
 
 #define ENGINE_VERSION "0.0.1"
 
+const i32 fps = 60;
+const i32 tpf = 1000 / fps;
+
 
 c8 title[64];
 state_t *state;
@@ -58,7 +61,11 @@ i32 main(i32 argc, c8 **argv) {
 
         system_blit(system);
         system_flip(system);
-        system_delay(1);
+
+        system->timer.last_tick = system_tick();
+        if (system->timer.last_tick - system->timer.tick < tpf) {
+            system_delay(tpf - (system->timer.last_tick - system->timer.tick));
+        }
     }
 
     game_release(state);

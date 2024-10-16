@@ -7,7 +7,6 @@
 typedef struct config_file_s {
     i32 full_screen;
     i32 cross_fade;
-    i32 fps;
     i32 debug;
     i32 quit;
     i32 version;

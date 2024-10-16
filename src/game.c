@@ -12,12 +12,14 @@
 #define HQR_PALETTE_MENU 5
 
 char fps_text[64];
-
+u32 fps_elapsed = 0;
+f32 fps_elapsed_delta = 0;
 
 
 
 void game_init(state_t *state) {
     printf("Initializing game...\n");
+    debug_set_colour(200); // 15
 
     // if(!hqr_get_entry(state->screen.palette, "RESSOURC.HQR", HQR_PALETTE_MENU)) {
 	// 	printf("Error: Couldn't load palette\n");
@@ -38,13 +40,13 @@ void game_release(state_t *state) {
 }
 
 void game_fps(screen_t *screen, timer_t *timer) {
-    timer->frame_count++;
-    if (timer->tick - timer->last_tick >= 1000) {
-        sprintf(fps_text, "FPS: %d", timer->frame_count);
-        timer->frame_count = 0;
-        timer->last_tick = timer->tick;
-        debug_set_colour(200); // 15
+    if (fps_elapsed < 500) {
+        fps_elapsed += timer->tick - timer->last_tick;
+    } else {
+        fps_elapsed_delta = (f32)(timer->tick - timer->last_tick) / 1000.0f;
+        fps_elapsed = 0;
     }
+    sprintf(fps_text, "FPS: %d", (i32)(1.0f / fps_elapsed_delta));
     debug_draw_text(screen->front_buffer, 10, 10, fps_text);
 }
 
