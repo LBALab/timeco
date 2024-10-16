@@ -2,7 +2,8 @@
 #include <stdio.h>
 
 #include "lib/common.h"
-#include "lib/system.h"
+
+#include "system.h"
 
 
 void system_init(system_t *system, c8 *title, i32 width, i32 height, i32 bpp) {

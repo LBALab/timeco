@@ -5,6 +5,7 @@
 #include "hqr.h"
 
 #include "../system.h"
+#include "../config.h"
 
 
 #define NUM_COLOURS 256
@@ -55,7 +56,7 @@ void screen_image(screen_t *screen, system_t *system, u32 index, u32 delay, i32 
     system_flip(system);
     
     if (delay) {
-        system_delay_events(system, delay);
+        system_delay_events(system, (config_file.debug) ? 750 : delay);
         screen_fade_to_black(system, screen->palette);
         screen_clear_back_buffer(screen);
     }

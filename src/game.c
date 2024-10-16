@@ -43,7 +43,7 @@ void game_fps(screen_t *screen, timer_t *timer) {
         sprintf(fps_text, "FPS: %d", timer->frame_count);
         timer->frame_count = 0;
         timer->last_tick = timer->tick;
-        debug_set_colour(15);
+        debug_set_colour(200); // 15
     }
     debug_draw_text(screen->front_buffer, 10, 10, fps_text);
 }

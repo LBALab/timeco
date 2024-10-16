@@ -2,8 +2,8 @@
 
 #include "lib/common.h"
 #include "lib/screen.h"
-#include "lib/system.h"
 
+#include "system.h"
 #include "renderer.h"
 #include "game_detection.h"
 

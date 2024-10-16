@@ -2,8 +2,8 @@
 #include <stdio.h>
 
 #include "lib/common.h"
-#include "lib/system.h"
 
+#include "system.h"
 #include "state.h"
 #include "game.h"
 #include "game_detection.h"

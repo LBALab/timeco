@@ -2,7 +2,7 @@
 
 #include <SDL3/SDL.h>
 
-#include "common.h"
+#include "lib/common.h"
 
 
 typedef struct {
