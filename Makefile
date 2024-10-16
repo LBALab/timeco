@@ -16,7 +16,7 @@ SDL_MIXER_PATH = lib/sdl_mixer
 SDL_MIXER_BIN = $(BIN)/$(SDL_MIXER_PATH)
 
 INCLUDES += -I$(SDL_PATH)/include -I$(SDL_MIXER_PATH)/include
-LDFLAGS += -L$(SDL_BIN) -L$(SDL_MIXER_BIN) -Wl,-rpath -Wl,${ROOT} -lSDL3
+LDFLAGS += -L$(SDL_BIN) -L$(SDL_MIXER_BIN) -Wl,-rpath -Wl,${ROOT} -lSDL3 -lSDL3_mixer
 
 timeco:
 	$(CC) $(INCLUDES) $(CFLAGS) $(LDFLAGS) $(SRCS) -o $(BIN)/$@

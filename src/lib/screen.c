@@ -56,7 +56,7 @@ void screen_image(screen_t *screen, system_t *system, u32 index, u32 delay, i32 
     system_flip(system);
     
     if (delay) {
-        system_delay_events(system, (config_file.debug) ? 750 : delay);
+        system_delay_events(system, delay);
         screen_fade_to_black(system, screen->palette);
         screen_clear_back_buffer(screen);
     }
