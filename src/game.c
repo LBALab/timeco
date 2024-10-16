@@ -1,12 +1,12 @@
 #include "game.h"
 
-#include "common.h"
+#include "lib/common.h"
+#include "lib/screen.h"
+#include "lib/debug_font.h"
+#include "lib/hqr.h"
 #include "state.h"
 #include "game_detection.h"
 #include "renderer.h"
-#include "screen.h"
-#include "hqr.h"
-#include "lib/screen/debug_font.h"
 
 
 #define HQR_PALETTE_MENU 5
@@ -24,8 +24,14 @@ void game_init(state_t *state) {
 	// }
     // system_set_palette(&state->system, state->screen.palette);
 
-    // screen_image(&state->screen, 34, 6000, 0);
-    screen_image(&state->screen, 38, 6000, 0);
+    // activision.acf logo if US
+    screen_image(&state->screen, &state->system, 34, 6000, FALSE);
+    screen_image(&state->screen, &state->system, 38, 6000, TRUE);
+    // Virgin if JP or ASIA
+
+    // then menu > new game > then timewrap acf
+
+    screen_image(&state->screen, &state->system, 42, 0, TRUE);
 }
 
 void game_release(state_t *state) {

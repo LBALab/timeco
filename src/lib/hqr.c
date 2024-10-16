@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "hqr.h"
-#include "utils/filereader.h"
+#include "file_reader.h"
 
 
 file_reader_t fr;

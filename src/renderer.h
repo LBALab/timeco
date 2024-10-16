@@ -1,7 +1,7 @@
 #pragma once
 
 #include "renderer.h"
-#include "common.h"
+#include "lib/common.h"
 #include "system.h"
 #include "pixel_colour.h"
 

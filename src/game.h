@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "lib/common.h"
 #include "state.h"
 #include "renderer.h"
 #include "game_detection.h"

@@ -2,7 +2,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "common.h"
+#include "lib/common.h"
 
 typedef struct config_file_s {
     i32 full_screen;

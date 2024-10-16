@@ -1,5 +1,5 @@
 #include "state.h"
-#include "common.h"
+#include "lib/common.h"
 #include "game_detection.h"
 
 

@@ -24,7 +24,7 @@
 #ifndef XMIDI_H
 #define XMIDI_H
 
-#include "../common.h"
+#include "common.h"
 
 /**
  * Credit where credit is due:

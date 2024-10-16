@@ -4,6 +4,7 @@
 
 #include "common.h"
 
+
 typedef struct {
     u32 tick;
     u32 last_tick;
@@ -34,6 +35,7 @@ void system_set_title(system_t *system, c8 *title);
 
 u32 system_tick();
 void system_delay(u32 ms);
+void system_delay_events(system_t *system, u32 ms);
 void system_events(system_t *system);
 
 void system_create_surface(system_t *system, u8 *front_buffer);

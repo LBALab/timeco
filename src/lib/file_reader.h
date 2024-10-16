@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../common.h"
+#include "common.h"
 
 
 #define SECTORS_IN_BUFFER (3)

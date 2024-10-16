@@ -1,7 +1,7 @@
 #include <math.h>
 
 #include "geometry.h"
-#include "common.h"
+#include "lib/common.h"
 
 
 inline void vec2_init(vec2_t *v) {

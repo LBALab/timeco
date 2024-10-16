@@ -1,6 +1,6 @@
 #pragma once
 
-#include "common.h"
+#include "lib/common.h"
 
 #define FPS_LIMIT 60
 

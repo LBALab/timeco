@@ -3,10 +3,11 @@
 #include <string.h>
 #include <assert.h>
 
-#include "common.h"
+#include "lib/common.h"
+#include "lib/file_reader.h"
+#include "lib/fcaseopen.h"
+
 #include "config.h"
-#include "utils/filereader.h"
-#include "utils/fcaseopen.h"
 
 
 #define DEFAULT_FRAMES_PER_SECOND 20;

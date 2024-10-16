@@ -12,6 +12,10 @@
 #define printf(...)
 #endif
 
+#define FALSE 0
+#define TRUE 1
+
+
 typedef char c8;
 typedef bool b8;
 typedef uint8_t  u8;

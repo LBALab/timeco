@@ -1,5 +1,6 @@
+#include "lib/file_system.h"
+
 #include "game_detection.h"
-#include "file_system.h"
 
 inline game_type_e detect_game() {
     if (file_exists("RESSOURC.HQR")) {

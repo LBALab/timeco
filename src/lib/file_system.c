@@ -1,7 +1,8 @@
 #include <sys/stat.h>
 
-#include "file_system.h"
 #include "common.h"
+#include "file_system.h"
+
 
 inline bool file_exists(const char* path) {
     struct stat buffer;

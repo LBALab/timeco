@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "common.h"
+#include "lib/common.h"
 #include "file_system.h"
 
 // see format: https://opensource.apple.com/source/tcl/tcl-20/tcl_ext/tkimg/tkimg/bmp/bmp.txt.auto.html

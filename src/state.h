@@ -1,9 +1,10 @@
 #pragma once
 
-#include "common.h"
-#include "system.h"
+#include "lib/common.h"
+#include "lib/screen.h"
+#include "lib/system.h"
+
 #include "renderer.h"
-#include "screen.h"
 #include "game_detection.h"
 
 

@@ -1,8 +1,8 @@
 #include <SDL3/SDL.h>
 #include <stdio.h>
 
-#include "system.h"
-#include "common.h"
+#include "lib/common.h"
+#include "lib/system.h"
 
 
 void system_init(system_t *system, c8 *title, i32 width, i32 height, i32 bpp) {
@@ -54,6 +54,14 @@ inline u32 system_tick() {
 
 inline void system_delay(u32 ms) {
     SDL_Delay(ms);
+}
+
+void system_delay_events(system_t *system, u32 ms) {
+    u32 start = system_tick();
+    while (system_tick() - start < ms) {
+        system_events(system);
+        system_delay(1);
+    }
 }
 
 void system_events(system_t *system) {

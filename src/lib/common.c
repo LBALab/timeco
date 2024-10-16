@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h> // memcpy
+#include <string.h>
 
 #include "common.h"
 

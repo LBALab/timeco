@@ -1,7 +1,7 @@
 #include <math.h>
 
 #include "pixel_colour.h"
-#include "common.h"
+#include "lib/common.h"
 
 
 void pixel_colour_init(pixel_colour *pc, u32 value) {

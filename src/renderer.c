@@ -1,7 +1,7 @@
 #include <math.h>
 
 #include "renderer.h"
-#include "common.h"
+#include "lib/common.h"
 #include "state.h"
 
 

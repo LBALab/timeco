@@ -1,11 +1,12 @@
 #include <SDL3/SDL.h>
 #include <stdio.h>
 
-#include "common.h"
+#include "lib/common.h"
+#include "lib/system.h"
+
 #include "state.h"
 #include "game.h"
 #include "game_detection.h"
-#include "system.h"
 #include "renderer.h"
 #include "config.h"
 

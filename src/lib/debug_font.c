@@ -1,4 +1,4 @@
-#include "../../common.h"
+#include "common.h"
 
 
 u32 font_size = 8;
