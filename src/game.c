@@ -27,7 +27,9 @@ void game_init(state_t *state) {
     // system_set_palette(&state->system, state->screen.palette);
 
     // activision.acf logo if US
+    
     screen_image(&state->screen, &state->system, 34, 6000, FALSE);
+
     screen_image(&state->screen, &state->system, 38, 6000, TRUE);
     // Virgin if JP or ASIA
 

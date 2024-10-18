@@ -48,6 +48,38 @@ There is a dependency on SDL3 library and it will be reference as a git submodul
 > make run
 
 
+## Site and Documentation
+
+### How can I contribute
+
+Fork the projct to your own repository, make your changes and submit a pull request. If you are not familiar with git you can try editing the files directly on GitHub or drop us a message on Discord.
+
+If you need help to get you started with this project, you can join us on [Discord](https://discord.gg/gfzna5SfZ5).
+
+### Install Jekyll and Bundler
+
+If you don't have Jekyll installed, you can install it by running the following command:
+
+```bash
+gem update --system
+gem install jekyll bundler
+```
+
+### Building and previewing your site locally
+
+Assuming [Jekyll] and [Bundler] are installed on your computer:
+
+1.  Change your working directory to the root directory of your site.
+
+2.  Run `bundle install`.
+
+3.  Run `bundle exec jekyll serve --watch` to build your site and preview it at `localhost:4000`.
+
+    The built site is stored in the directory `_site`.
+
+Once changes are commited to the repository, the site will be automatically built and deployed to GitHub Pages under the URL: https://lbalab.github.io/lba-engine-architecture/
+
+
 # Authors
 
 Refer [AUTHORS.md](AUTHORS.md) file for a full list of contributions on this project.

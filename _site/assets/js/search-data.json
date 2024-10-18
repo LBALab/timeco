@@ -1,0 +1,359 @@
+{"0": {
+    "doc": "Articles",
+    "title": "Articles",
+    "content": " ",
+    "url": "/time-commando/articles",
+    
+    "relUrl": "/time-commando/articles"
+  },"1": {
+    "doc": "Hints & Cheats",
+    "title": "Hints &amp; Cheats",
+    "content": " ",
+    "url": "/time-commando/hint-cheats#hints--cheats",
+    
+    "relUrl": "/time-commando/hint-cheats#hints--cheats"
+  },"2": {
+    "doc": "Hints & Cheats",
+    "title": "Hints",
+    "content": " ",
+    "url": "/time-commando/hint-cheats#hints",
+    
+    "relUrl": "/time-commando/hint-cheats#hints"
+  },"3": {
+    "doc": "Hints & Cheats",
+    "title": "Modern Wars",
+    "content": "In the 2nd level of Modern Wars, don’t kill the dog. The dog will help you search for secrets and attacks enemies. ",
+    "url": "/time-commando/hint-cheats#modern-wars",
+    
+    "relUrl": "/time-commando/hint-cheats#modern-wars"
+  },"4": {
+    "doc": "Hints & Cheats",
+    "title": "Cheat Codes",
+    "content": "When playing the game, type: . | HUIBON - Every weapon in the era, with full ammo. | OTOREL - Automatic reloads of all weapons. | IFODRE - Unlimited ammo. | VENRUF - Stops the virus through gameplay. | DOLTEB - You’ll get four power-ups battery to your health. | VONLUX - Full health. | TIXOBO - Skip level. | . ",
+    "url": "/time-commando/hint-cheats#cheat-codes",
+    
+    "relUrl": "/time-commando/hint-cheats#cheat-codes"
+  },"5": {
+    "doc": "Hints & Cheats",
+    "title": "Password Codes",
+    "content": "Type in the password section from main menu. ",
+    "url": "/time-commando/hint-cheats#password-codes",
+    
+    "relUrl": "/time-commando/hint-cheats#password-codes"
+  },"6": {
+    "doc": "Hints & Cheats",
+    "title": "Easy mode",
+    "content": ". | YPTERFGZ - Roman Empire | NKTOLVIF - Feudal Japan | VMXYICCB - European Middle Age | FDQLUGGC - Conquistador | ZREHQFIR - Wild West | FBTAWPFC - Modern Wars | EFBYQHME - Future | CWFLWYHC - Beyond Time | . ",
+    "url": "/time-commando/hint-cheats#easy-mode",
+    
+    "relUrl": "/time-commando/hint-cheats#easy-mode"
+  },"7": {
+    "doc": "Hints & Cheats",
+    "title": "Medium mode",
+    "content": ". | QJSLVABL - Roman Empire | KAYAGEAF - Feudal Japan | MZFSPQDD - European Middle Age | AVMJFGGU - Conquistador | EVBSVTCV - Wild West | YLHHGXBO - Modern Wars | ALPYPJFO - Future | YBULVABN - Beyond Time | . ",
+    "url": "/time-commando/hint-cheats#medium-mode",
+    
+    "relUrl": "/time-commando/hint-cheats#medium-mode"
+  },"8": {
+    "doc": "Hints & Cheats",
+    "title": "Hard mode",
+    "content": ". | SOIOLGNK - Roman Empire | TFJSVJMC - Feudal Japan | XFYAMXIE - European Middle Age | ZOVASAIV - Conquistador | BODSGWLW - Wild West | VEJHMQKO - Modern Wars | ZEYPCEHQ - Future | HMFDLGNN - Beyond Time | . ",
+    "url": "/time-commando/hint-cheats#hard-mode",
+    
+    "relUrl": "/time-commando/hint-cheats#hard-mode"
+  },"9": {
+    "doc": "Hints & Cheats",
+    "title": "Bonus Level",
+    "content": "In the password memu type: . | COMMANDO, for additional bonus level | ACTIVATE, for 99 chips and 4 batteries | . ",
+    "url": "/time-commando/hint-cheats#bonus-level",
+    
+    "relUrl": "/time-commando/hint-cheats#bonus-level"
+  },"10": {
+    "doc": "Hints & Cheats",
+    "title": "Hints & Cheats",
+    "content": " ",
+    "url": "/time-commando/hint-cheats",
+    
+    "relUrl": "/time-commando/hint-cheats"
+  },"11": {
+    "doc": "Covers",
+    "title": "Covers",
+    "content": ". ",
+    "url": "/gallery/covers",
+    
+    "relUrl": "/gallery/covers"
+  },"12": {
+    "doc": "Credits",
+    "title": "Credits",
+    "content": " ",
+    "url": "/time-commando/credits",
+    
+    "relUrl": "/time-commando/credits"
+  },"13": {
+    "doc": "Gifs",
+    "title": "Gifs",
+    "content": ". ",
+    "url": "/gallery/gifs",
+    
+    "relUrl": "/gallery/gifs"
+  },"14": {
+    "doc": "HD Renders",
+    "title": "HD Renders",
+    "content": ". ",
+    "url": "/gallery/hd",
+    
+    "relUrl": "/gallery/hd"
+  },"15": {
+    "doc": "Images",
+    "title": "Images",
+    "content": "TimeCo and LBA uses a 8-bit raw image format containing 256 colours and a 640 by 480 screen resolution. Each image has their own optimised palette up to 240 colours with 16 initial colours reserved for the default basic colours that are used for displaying dialogs, menu interface and debugging information on top of the image. ",
+    "url": "/game-engine/images",
+    
+    "relUrl": "/game-engine/images"
+  },"16": {
+    "doc": "Images",
+    "title": "TimeCo",
+    "content": ". ",
+    "url": "/game-engine/images#timeco",
+    
+    "relUrl": "/game-engine/images#timeco"
+  },"17": {
+    "doc": "Time Commando",
+    "title": "Time Commando",
+    "content": "Welcome to TimeCo, a Time Commando site aiming as a goto resource for all things Time Commando. TimeCo is a project to document and teach how Adeline Software International implemented Time Commando game. This documentation will refer to the engines open-sourced and reimplemented by the community, such as timeco, lba1-classic-community, lba2-classic-community, twin-e, twine ScummVM, as well as publicaly available articles and details about the game. ",
+    "url": "/",
+    
+    "relUrl": "/"
+  },"18": {
+    "doc": "Time Commando",
+    "title": "Copyright",
+    "content": "The intellectual property is currently owned by [2.21]. Copyright [2.21] . Originaly developed by Adeline Software International in 1994 (LBA1), Time Commando (1996) and LBA2 (1997). ",
+    "url": "/#copyright",
+    
+    "relUrl": "/#copyright"
+  },"19": {
+    "doc": "Time Commando",
+    "title": "Licence",
+    "content": "This documentation is licensed under MIT. The source code for TimeCo is under GNU General Public License v2.0. The source code for both LBA1 and LBA2 released by [2.21] has been licensed under the GNU General Public License. Please note theses licenses do not apply to Time Commando game assets (art, models, textures, audio, etc.) are not open-sourced and therefore aren’t redistributable. ",
+    "url": "/#licence",
+    
+    "relUrl": "/#licence"
+  },"20": {
+    "doc": "Gallery",
+    "title": "Gallery",
+    "content": ". ",
+    "url": "/gallery",
+    
+    "relUrl": "/gallery"
+  },"21": {
+    "doc": "Game Engine",
+    "title": "Game Engine",
+    "content": " ",
+    "url": "/game-engine",
+    
+    "relUrl": "/game-engine"
+  },"22": {
+    "doc": "Game Engine",
+    "title": "Overview",
+    "content": "Time Commando (TimeCo) was an evolution of the tooling created during the development of Little Big Adventure 1 which is also based on Alone in the Dark (AITD). These gamees shared pre-rendered backgrounds with 3D software rendered characters, a technique use in the early 90s due to hardware constraints. AITD was the pioneer of pre-rendered backgrounds and use static images that were hand drawn on top of 3D wireframes of a 3D scene. Each image corresponding to a different camera view of the scene. LBA did it differently and use isometric sprite composition in order to create a scene and use a single isometric camera view panning around the environment. The isometric scenes were composed in a grid format with limited width, depth and height. Various objects were composed by a number of sprites following a set of standard dimensions and then placed together to create scenes. They are also used for collision detection with slopes to make the height transition smoothly. The team continue the trend in Time Commando (TimeCo) and used pre-rendered backgrounds with video motion. A similar technique used in LBA movies but improved to be used not only as cut-scenes but in-game backgrounds with depth information attached. TimeCo had another enhancement by adding texture mapping to their 3d model formats. ",
+    "url": "/game-engine#overview",
+    
+    "relUrl": "/game-engine#overview"
+  },"23": {
+    "doc": "Scenes",
+    "title": "Scenes",
+    "content": " ",
+    "url": "/game-engine/scenes",
+    
+    "relUrl": "/game-engine/scenes"
+  },"24": {
+    "doc": "Original Libraries",
+    "title": "Libraries",
+    "content": ". | lib_sys - core systems (initialization, timers, memory, files, …) | lib_svga - 2D screens (frame buffers) | lib_menu - user interfaces | lib_3d - display and animate 3D objects | lib_cd - to access optical drives | lib_ail - to access the audio | . ",
+    "url": "/game-engine/libraries#libraries",
+    
+    "relUrl": "/game-engine/libraries#libraries"
+  },"25": {
+    "doc": "Original Libraries",
+    "title": "Original Libraries",
+    "content": " ",
+    "url": "/game-engine/libraries",
+    
+    "relUrl": "/game-engine/libraries"
+  },"26": {
+    "doc": "Promotional Art",
+    "title": "Promotional Art",
+    "content": ". ",
+    "url": "/gallery/promotional-art",
+    
+    "relUrl": "/gallery/promotional-art"
+  },"27": {
+    "doc": "Scans",
+    "title": "Scans",
+    "content": " ",
+    "url": "/gallery/scans",
+    
+    "relUrl": "/gallery/scans"
+  },"28": {
+    "doc": "Scans",
+    "title": "English Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#english-magazines",
+    
+    "relUrl": "/gallery/scans#english-magazines"
+  },"29": {
+    "doc": "Scans",
+    "title": "Brazilian Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#brazilian-magazines",
+    
+    "relUrl": "/gallery/scans#brazilian-magazines"
+  },"30": {
+    "doc": "Scans",
+    "title": "French Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#french-magazines",
+    
+    "relUrl": "/gallery/scans#french-magazines"
+  },"31": {
+    "doc": "Scans",
+    "title": "Italian Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#italian-magazines",
+    
+    "relUrl": "/gallery/scans#italian-magazines"
+  },"32": {
+    "doc": "Scans",
+    "title": "Spanish Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#spanish-magazines",
+    
+    "relUrl": "/gallery/scans#spanish-magazines"
+  },"33": {
+    "doc": "Scans",
+    "title": "Deutsch Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#deutsch-magazines",
+    
+    "relUrl": "/gallery/scans#deutsch-magazines"
+  },"34": {
+    "doc": "Scans",
+    "title": "Dutch Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#dutch-magazines",
+    
+    "relUrl": "/gallery/scans#dutch-magazines"
+  },"35": {
+    "doc": "Scans",
+    "title": "Polish Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#polish-magazines",
+    
+    "relUrl": "/gallery/scans#polish-magazines"
+  },"36": {
+    "doc": "Scans",
+    "title": "Russian Magazines",
+    "content": ". ",
+    "url": "/gallery/scans#russian-magazines",
+    
+    "relUrl": "/gallery/scans#russian-magazines"
+  },"37": {
+    "doc": "Scripting",
+    "title": "Scripting",
+    "content": " ",
+    "url": "/game-engine/scenes/scripting",
+    
+    "relUrl": "/game-engine/scenes/scripting"
+  },"38": {
+    "doc": "Sketches",
+    "title": "Sketches",
+    "content": ". ",
+    "url": "/gallery/sketches",
+    
+    "relUrl": "/gallery/sketches"
+  },"39": {
+    "doc": "Story",
+    "title": "Story",
+    "content": "A deadly virus has invaded a top secret military super computer. Its catastrophic time-warping effects now threaten to overtake the computer systems of the world. If you cannot restore its memory in time, the growing virus will cause the world’s collapse. You must journey through the corridors of history to stop this technological demon. But vicious warriors await with lethal purpose. Instinct will be your only ally. All-out combat, your only choice. Time Commando will take you on a journey in time and space that you will never forget. With plenty of weapon types, stylized visuals, and diversified gameplay it should keep you entertained for many hours. This title is very unique and it should be a part of every serious game collection. | 9 Worlds to explore, each in a different time and place: prehistoric, Roman, feudal Japan, Medieval, Conquistador, the Wild West, and the modern wars. | Impressive arsenal of weapons, from Katanas through rifles and spells to a technologically advanced combat yo-yo. | Entertaining and challenging puzzle-solving elements, stylized visuals, and an original story. | . ",
+    "url": "/time-commando/story",
+    
+    "relUrl": "/time-commando/story"
+  },"40": {
+    "doc": "Story",
+    "title": "Transcript",
+    "content": ". March 15 . 06:00 hours Security Zone 7. The historical tactical Center, an elite combat training facility home to the military’s most powerful supercomputer. The Otaga Corporation has engineered a radical breakthrough in tachon physics that enables scientists literally to manipulate time for the military this means the power to simul at any form of combat past present or future. It also means the constant threat of electronic theft and sabotage. That’s why the military created S.A.V.E. special action for virus elimination. 06:30 save agent Stanley opar starts his shift. It looks like an easy day, not even a routine drill. Until disaster strikes. 07:00 an agent for a rival Corporation has infiltrated the top ranks of Otaga programmers his mission sabotage. He infects the system with a specially designed Predator virus with no regard for its lethal consequences. Lodging itself in the computer’s memory the virus creates a Time Distortion Vortex that will swallow everything in its path. A class one alarm reserved for the highest level emergencies. He doesn’t know it yet but this is no ordinary virus. Stanley opar is about to face The Ultimate Showdown. He must enter the vortex and save the computer from the rapidly mutating virus. No amount of training could have prepared him for the dangers ahead, and only you can help him as he begins his battle Through Time. ",
+    "url": "/time-commando/story#transcript",
+    
+    "relUrl": "/time-commando/story#transcript"
+  },"41": {
+    "doc": "Story",
+    "title": "Storyboard",
+    "content": ". ",
+    "url": "/time-commando/story#storyboard",
+    
+    "relUrl": "/time-commando/story#storyboard"
+  },"42": {
+    "doc": "Useful Links",
+    "title": "Useful Links",
+    "content": " ",
+    "url": "/links",
+    
+    "relUrl": "/links"
+  },"43": {
+    "doc": "Useful Links",
+    "title": "Time Commando",
+    "content": ". | Time Commando on MobyGames | Time Commando on Wikipedia | . ",
+    "url": "/links#time-commando",
+    
+    "relUrl": "/links#time-commando"
+  },"44": {
+    "doc": "Useful Links",
+    "title": "Tehcnical Articles",
+    "content": ". | Defence-Force: Time Commando | . ",
+    "url": "/links#tehcnical-articles",
+    
+    "relUrl": "/links#tehcnical-articles"
+  },"45": {
+    "doc": "Useful Links",
+    "title": "Buy Digital",
+    "content": ". | Time Commando on GOG | Time Commando on Steam | Time Commando on Epic Games Store | Time Commando on itch.io | . ",
+    "url": "/links#buy-digital",
+    
+    "relUrl": "/links#buy-digital"
+  },"46": {
+    "doc": "Useful Links",
+    "title": "Speedrun",
+    "content": ". | Time Commando on Speedrun.com | . ",
+    "url": "/links#speedrun",
+    
+    "relUrl": "/links#speedrun"
+  },"47": {
+    "doc": "Useful Links",
+    "title": "Development",
+    "content": ". | Metadata | LBA Packager | File Info | LBA Lab Github Organisation | LBA1 Source Code | LBA2 Source Code | . ",
+    "url": "/links#development",
+    
+    "relUrl": "/links#development"
+  },"48": {
+    "doc": "Useful Links",
+    "title": "Community",
+    "content": ". | Discord Community | Magicball Networks | . ",
+    "url": "/links#community",
+    
+    "relUrl": "/links#community"
+  },"49": {
+    "doc": "Walkthroughs",
+    "title": "Walkthroughs",
+    "content": " ",
+    "url": "/time-commando/walkthroughs",
+    
+    "relUrl": "/time-commando/walkthroughs"
+  },"50": {
+    "doc": "Zones",
+    "title": "Zones",
+    "content": " ",
+    "url": "/game-engine/scenes/zones",
+    
+    "relUrl": "/game-engine/scenes/zones"
+  }
+}
