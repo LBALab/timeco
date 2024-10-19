@@ -11,4 +11,4 @@ TimeCo and LBA uses a 8-bit raw image format containing 256 colours and a 640 by
 
 ## TimeCo
 
-![TimeCo Menu]({{ site.baseurl }}/assets/tico-menu.jpg)
+![TimeCo Menu]({{ site.baseurl }}/assets/others/tico-menu.jpg)

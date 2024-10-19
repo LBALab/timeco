@@ -26,9 +26,6 @@ images:
 - image_path: assets/images/gifs/tunel_stanley.gif
   title: Stanley in the Tunnel
   link: assets/images/gifs/tunel_stanley.gif
-- image_path: assets/images/gifs/intro.webp
-  title: Intro
-  link: assets/images/gifs/intro.webp
 ---
 
 # Gifs
@@ -40,3 +37,6 @@ images:
         </a>
     {% endfor %}
 </div>
+
+Source: [https://blog.defence-force.org/?tag=Time%20Commando](https://blog.defence-force.org/?tag=Time%20Commando)
+
