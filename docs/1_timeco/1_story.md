@@ -16,10 +16,16 @@ Time Commando will take you on a journey in time and space that you will never f
 * Impressive arsenal of weapons, from Katanas through rifles and spells to a technologically advanced combat yo-yo.
 * Entertaining and challenging puzzle-solving elements, stylized visuals, and an original story.
 
+## Trailer
+
+<div>
+    <iframe width="640" height="480" src="https://www.youtube.com/embed/7hbcUUK9f_4?si=nV-dZ4gjBQoNNPGT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="margin: 6px; display: inline-flex; border-radius: 15px; border: 1px solid #80808042; padding: 5px;"></iframe>
+</div>
+
 ## Transcript
 
 <a href="https://youtu.be/9LpTAzKqo5w?si=PRuLwMCm4haSapfl" style="margin: 6px; display: inline-flex; border-radius: 15px; border: 1px solid #80808042; padding: 5px;">
-    <img src="{{ site.baseurl }}/assets/images/gifs/intro.webp" alt="Intro" style="border-radius: 10px" />
+    <img width="630" height="470" src="{{ site.baseurl }}/assets/images/gifs/intro.webp" alt="Intro" style="border-radius: 10px" />
 </a>
 
 March 15

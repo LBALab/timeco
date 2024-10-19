@@ -15,6 +15,8 @@ permalink: /links
 
 * [Defence-Force: Time Commando](http://www.defence-force.org/computing/videogame/companies/adeline/timecommando/index.htm)
 
+* [Old Time Commando Site](https://www.defence-force.org/computing/videogame/companies/adeline/timecommando/index.htm)
+
 
 ### Buy Digital
 

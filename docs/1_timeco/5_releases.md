@@ -7,6 +7,14 @@ permalink: /time-commando/releases
 ---
 
 # Releases
+{: .no_toc }
+
+## Table of Contents
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
 
 ## DOS
 ### 1996 Release

@@ -8,7 +8,7 @@ permalink: /
 
 # Time Commando
 
-Welcome to TimeCo, a Time Commando site aiming as a goto resource for all things Time Commando and to detail the a reimplementation of the PC version of the game, developed by Adeline Software International in 1996. The idea is to reimplement the game in C programing language using SDL3 and take advantage of the open-source engines developed by the community, open-sourced by [2.21] and the technical details available in the public domain.
+Welcome to TimeCo, a Time Commando site aiming as a goto resource for all things Time Commando and to detail a reimplementation of the PC version of the game, developed by Adeline Software International in 1996. The idea is to reimplement the game in C programing language using SDL3 and take advantage of the open-source engines developed by the community, open-sourced by [2.21] and the technical details available in the public domain.
 
 While documenting the game we want to teach how Adeline Software International implemented Time Commando game and create technical specifications about the process. This documentation will refer to the engines open-sourced and reimplemented by the community, such as [timeco](https://github.com/LBALab/timeco), [lba1-classic-community](https://github.com/LBALab/lba1-classic-community), [lba2-classic-community](https://github.com/LBALab/lba2-classic-community), [twin-e](https://github.com/LBALab/twin-e), [twine ScummVM](https://github.com/scummvm/scummvm/tree/master/engines/twine), as well as publicaly available articles and details about the game.
 
