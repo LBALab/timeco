@@ -8,6 +8,8 @@ With the original source code of both LBA1 and LBA2 now available, we aim to fin
 
 ## Project References
 
+* Project Site - https://lbalab.github.io/timeco
+
 * Time Commando Dbug Articles with technical details - https://blog.defence-force.org/index.php?tag=Time%20Commando
 
 * TwinEngine - https://github.com/LBALab/twin-e
@@ -18,6 +20,7 @@ With the original source code of both LBA1 and LBA2 now available, we aim to fin
 
 * LBA2 Source Code - https://github.com/LBALab/lba2-classic-community
 
+* Magicball Networks - https://magicball.net/
 
 
 ## Goals
