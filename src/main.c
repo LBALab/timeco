@@ -4,6 +4,7 @@
 #include "lib/common.h"
 
 #include "system.h"
+#include "system_mixer.h"
 #include "state.h"
 #include "game.h"
 #include "game_detection.h"
@@ -46,10 +47,10 @@ i32 main(i32 argc, c8 **argv) {
     screen_t *screen = &state->screen;
 
     system_init(system, state->system.title, 640, 480, 1);
+    system_mixer_init(config_file.sample);
     screen_init(screen, system);
     system_create_surface(system, screen->front_buffer);
-    renderer_init(renderer, system);
-    
+
     game_init(state);
     system->timer.last_tick = system_tick();
 
@@ -58,7 +59,6 @@ i32 main(i32 argc, c8 **argv) {
         system_events(system);
 
         game_update(state);
-        game_draw(state);
 
         system_blit(system);
         system_flip(system);

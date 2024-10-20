@@ -12,8 +12,10 @@ typedef struct config_file_s {
     i32 version;
     i8 language[10];
     i32 difficulty;
+    i32 sample;
     i32 sample_volume;
     i32 music;
+    i32 music_volume;
     i32 resolution;
 } config_file_t;
 

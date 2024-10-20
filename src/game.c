@@ -7,9 +7,12 @@
 #include "state.h"
 #include "game_detection.h"
 #include "renderer.h"
+#include "sample.h"
 
 
 #define HQR_PALETTE_MENU 5
+#define HQR_RESSOURCE "RESSOURC.HQR"
+
 
 char fps_text[64];
 u32 fps_elapsed = 0;
@@ -21,6 +24,24 @@ void game_init(state_t *state) {
     printf("Initializing game...\n");
     debug_set_colour(200); // 15
 
+    sample_init();
+    renderer_init(&state->renderer, &state->system);
+
+    game_introduction();
+}
+
+void game_image(state_t *state, u32 index, u32 delay, i32 fade_in) {
+    if (!hqr_get_entry(state->screen.palette, HQR_RESSOURCE, index)) {
+        printf("Error: Couldn't load palette %d\n", index);
+    }
+    if (!hqr_get_entry(state->screen.back_buffer, HQR_RESSOURCE, index + 3)) { // +3 highest quality
+        printf("Error: Couldn't load image %d\n", index);
+    }
+
+    screen_image(&state->screen, &state->system, index, delay, fade_in);
+}
+
+void game_introduction() {
     // if(!hqr_get_entry(state->screen.palette, "RESSOURC.HQR", HQR_PALETTE_MENU)) {
 	// 	printf("Error: Couldn't load palette\n");
 	// }
@@ -28,14 +49,15 @@ void game_init(state_t *state) {
 
     // activision.acf logo if US
     
-    screen_image(&state->screen, &state->system, 34, 6000, FALSE);
+    sample_play(3, 22050, 0, 0);
+    game_image(state, 34, 6000, FALSE);
 
-    screen_image(&state->screen, &state->system, 38, 6000, TRUE);
+    game_image(state, 38, 6000, TRUE);
     // Virgin if JP or ASIA
 
     // then menu > new game > then timewrap acf
 
-    screen_image(&state->screen, &state->system, 42, 0, TRUE);
+    game_image(state, 42, 0, TRUE);
 }
 
 void game_release(state_t *state) {
@@ -53,11 +75,6 @@ void game_fps(screen_t *screen, timer_t *timer) {
 }
 
 void game_update(state_t *state) {
-    
-}
-
-
-void game_draw(state_t *state) {
     screen_clear(&state->screen);
     screen_flip(&state->screen);
     game_fps(&state->screen, &state->system.timer);

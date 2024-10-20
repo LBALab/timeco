@@ -133,6 +133,12 @@ void config_init() {
     }
 
     config_file.debug = 1;
+    config_file.full_screen = 0;
+    config_file.cross_fade = 0;
+    config_file.sample = 1;
+    config_file.sample_volume = 127;
+    config_file.music = 1;
+    config_file.music_volume = 127;
 
     fclose(fd);
 }

@@ -2,7 +2,6 @@
 
 #include "screen.h"
 #include "common.h"
-#include "hqr.h"
 
 #include "../system.h"
 #include "../config.h"
@@ -39,13 +38,6 @@ inline void screen_clear(screen_t *screen) {
 }
 
 void screen_image(screen_t *screen, system_t *system, u32 index, u32 delay, i32 fade_in) {
-    if (!hqr_get_entry(screen->palette, "RESSOURC.HQR", index)) {
-        printf("Error: Couldn't load palette %d\n", index);
-    }
-    if (!hqr_get_entry(screen->back_buffer, "RESSOURC.HQR", index + 3)) { // +3 highest quality
-        printf("Error: Couldn't load image %d\n", index);
-    }
-
     screen_flip(screen);
     if (fade_in) {
         screen_fade_to_pal(system, screen->palette);
