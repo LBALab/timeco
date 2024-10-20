@@ -43,9 +43,10 @@ void sample_set_position(i32 channel_index, i32 x, i32 y, i32 z, i32 hero_x, i32
 
 void sample_play(i32 index, i32 frequency, i32 repeat, i32 pan) {
     i32 sample_size = 0;
-    u8* sample_ptr;
+    u8* sample_ptr = NULL;
     sample_size = hqr_get_entry_alloc(&sample_ptr, HQR_RESOURCE, index);
     sample_play_position(index, sample_ptr, sample_size, frequency, repeat, 0, 0, 0, -1, 0, 0, 0);
+    memory_free(sample_ptr);
 }
 
 void sample_play_ptr(i32 index, u8* sample_ptr, i32 sample_size, i32 frequency, i32 repeat, i32 pan) {
@@ -71,8 +72,6 @@ void sample_play_position(i32 index, u8* sample_ptr, i32 sample_size, i32 freque
         if (system_mixer_play(sample_ptr, sample_size, channel_index, repeat) == -1)
             printf("Error while playing Sample %d \n", index);
     }
-
-    free(sample_ptr);
 }
 
 void sample_resume() {

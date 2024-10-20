@@ -27,19 +27,13 @@ void system_init(system_t *system, c8 *title, i32 width, i32 height, i32 bpp) {
     SDL_SetRenderLogicalPresentation(system->renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
     SDL_SetRenderDrawColor(system->renderer, 0, 0, 0, 255);
 
-    system->texture = SDL_CreateTexture(
-        system->renderer,
-        SDL_PIXELFORMAT_RGBA8888, // SDL_PIXELFORMAT_INDEX8
-        SDL_TEXTUREACCESS_STATIC,
-        width,
-        height
-    );
-
     SDL_UpdateWindowSurface(system->window);
 }
 
 void system_release(system_t *system) {
     SDL_DestroyTexture(system->texture);
+    SDL_DestroySurface(system->surface);
+    SDL_DestroyPalette(system->palette);
     SDL_DestroyRenderer(system->renderer);
     SDL_DestroyWindow(system->window);
     SDL_Quit();
@@ -102,6 +96,9 @@ void system_create_surface(system_t *system, u8 *front_buffer) {
 
 void system_blit(system_t *system) {
     SDL_RenderClear(system->renderer);
+    if (system->texture) {
+        SDL_DestroyTexture(system->texture);
+    }
     system->texture = SDL_CreateTextureFromSurface(system->renderer, system->surface);
     SDL_RenderTexture(system->renderer, system->texture, NULL, NULL);
 }
@@ -111,7 +108,6 @@ inline void system_flip(system_t *system) {
 }
 
 void system_set_palette(system_t *system, u8 *palette) {
-    // SDL_SetPaletteColors(system->palette, (SDL_Color *)palette, 0, 256);
     for (i32 i = 0; i < 256; i++) {
         system->palette->colors[i].r = palette[i * 3 + 0];
         system->palette->colors[i].g = palette[i * 3 + 1];

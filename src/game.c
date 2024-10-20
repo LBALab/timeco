@@ -89,8 +89,9 @@ void game_introduction() {
     i32 sample_hidden_index = 0;
     u8 *sample_ptr = NULL;
     u32 entry_size = hqr_get_hidden_entry_ptr(&sample_ptr, menu_samples, 0);
-
     sample_play_ptr(HQR_MENU_SAMPLES * 100 + sample_hidden_index, sample_ptr, entry_size, 22050, 0, 0);
+    memory_free(sample_ptr);
+    memory_free(menu_samples);
 }
 
 void game_release(state_t *state) {

@@ -54,7 +54,11 @@ inline void system_mixer_set_distance(i32 channel_index, i32 distance) {
 
 inline void system_mixer_load(u8 *sample_ptr, i32 samples_size) {
     SDL_IOStream *rw = SDL_IOFromMem(sample_ptr, samples_size);
+    if (chunk != NULL) {
+        Mix_FreeChunk(chunk);
+    }
     chunk = Mix_LoadWAV_IO(rw, 1);
+    SDL_FlushIO(rw);
 }
 
 inline void system_mixer_free() {
@@ -98,7 +102,11 @@ void system_mixer_music_fade_out(i32 ms) {
 
 inline void system_mixer_load_music(u8 *music_ptr, i32 music_size) {
     SDL_IOStream *rw = SDL_IOFromMem(music_ptr, music_size);
+    if (current_track != NULL) {
+        Mix_FreeMusic(current_track);
+    }
     current_track = Mix_LoadMUS_IO(rw, TRUE);
+    SDL_FlushIO(rw);
 }
 
 i32 system_mixer_free_music() {
@@ -118,8 +126,9 @@ i32 system_mixer_play_music(u8 *music_ptr, i32 music_size, i32 loop) {
 i32 system_mixer_play_music_mp3(c8 *music_file) {
     int error_code = 0;
     current_track = Mix_LoadMUS(music_file);
-    if (current_track == NULL)
+    if (current_track == NULL) {
         printf("Mix_LoadMUS: %s\n", SDL_GetError());
+    }
     error_code = Mix_PlayMusic(current_track, -1);
     if (error_code == -1) {
         printf("Mix_PlayMusic: %s\n", SDL_GetError());
