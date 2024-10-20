@@ -5,7 +5,8 @@
 #include "hqr.h"
 #include "file_reader.h"
 
-typedef struct hqr_hidden_entry_s {
+#pragma pack(1)
+typedef struct {
     u32 size_file;
     u32 compressed_size;
     i16 compress_type;
@@ -197,10 +198,11 @@ i32 hqr_get_entry_alloc(u8 ** ptr, c8 *filename, i32 index) {
     return size;
 }
 
-i32 hqr_get_hidden_entry_ptr(u8 *entry_ptr, void *hqr_ptr, i32 index)
-{
+i32 hqr_get_hidden_entry_ptr(u8 **entry_ptr, u8 *hqr_ptr, i32 index) {
     u32 num_hidden_entries;
     u32 offset;
+    u32 entry_size;
+    u8 *ptr;
 
     num_hidden_entries = *(u32*)hqr_ptr / 4;
 
@@ -210,10 +212,16 @@ i32 hqr_get_hidden_entry_ptr(u8 *entry_ptr, void *hqr_ptr, i32 index)
         return 0;
     }
 
-    entry_ptr = (u8*)hqr_ptr + index * 4;
-    offset = *(u32*)entry_ptr;
+    ptr = hqr_ptr + index * 4;
+    offset = *(u32*)ptr;
 
-    entry_ptr = (u8*)hqr_ptr + offset + sizeof(hqr_hidden_entry_t);
+    entry_size = *(u32*)(hqr_ptr + offset);
+    *entry_ptr = (u8*)malloc(entry_size * sizeof(u8));
+    if (!*entry_ptr) {
+        printf("HQR WARNING: unable to allocate entry memory!!\n");
+        return 0;
+    }
+    memcpy(*entry_ptr, hqr_ptr + offset + sizeof(hqr_hidden_entry_t), entry_size);
     
-    return 1;
+    return entry_size;
 }

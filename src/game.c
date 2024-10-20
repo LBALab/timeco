@@ -13,6 +13,8 @@
 #define HQR_PALETTE_MENU 5
 #define HQR_RESSOURCE "RESSOURC.HQR"
 
+#define HQR_MENU_SAMPLES        2
+
 #define HQR_SCREEN_ADELINE      34
 #define HQR_SCREEN_TIMECO       38
 #define HQR_SCREEN_MENU         42
@@ -49,7 +51,6 @@ void game_image(state_t *state, u32 index, u32 delay, i32 fade_in) {
 }
 
 void game_introduction() {
-
     sample_play(3, 22050, 0, 0);
     game_image(state, HQR_SCREEN_ADELINE, 6000, FALSE);
 
@@ -66,7 +67,7 @@ void game_introduction() {
     }
 
     game_image(state, HQR_SCREEN_TIMECO, 6000, TRUE);
-    sample_stop_all();
+    // sample_stop_all();
 
     switch(state->game_type) {
         case TIMECO_DEMO:
@@ -80,6 +81,16 @@ void game_introduction() {
 
     // then menu > new game > then timewrap acf
     game_image(state, HQR_SCREEN_MENU, 0, TRUE);
+
+    u8 *menu_samples = NULL;
+    if (!hqr_get_entry_alloc(&menu_samples, HQR_RESSOURCE, HQR_MENU_SAMPLES)) {
+        printf("Error: Couldn't load palette %d\n", HQR_MENU_SAMPLES);
+    }
+    i32 sample_hidden_index = 0;
+    u8 *sample_ptr = NULL;
+    u32 entry_size = hqr_get_hidden_entry_ptr(&sample_ptr, menu_samples, 0);
+
+    sample_play_ptr(HQR_MENU_SAMPLES * 100 + sample_hidden_index, sample_ptr, entry_size, 22050, 0, 0);
 }
 
 void game_release(state_t *state) {
