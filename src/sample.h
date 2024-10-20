@@ -11,7 +11,7 @@ void sample_init();
 i32 sample_is_playing(i32 index);
 
 void sample_play(i32 index, i32 frequency, i32 repeat, i32 pan);
-void sample_play_hidden(i32 index, i32 hidden_index, u8* menu_samples, i32 frequency, i32 repeat, i32 pan);
+void sample_play_hidden(i32 hidden_index, u8* entry_ptr, i32 frequency, i32 repeat, i32 pan);
 void sample_play_ptr(i32 index, u8* sample_ptr, i32 sample_size, i32 frequency, i32 repeat, i32 pan);
 void sample_play_position(i32 index, u8* sample_ptr, i32 sample_size, i32 frequency, i32 repeat, i32 x, i32 y, i32 z, i32 actor_index, i32 hero_x, i32 hero_y, i32 hero_z);
 void sample_pause();

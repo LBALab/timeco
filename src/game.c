@@ -25,7 +25,7 @@
 
 char fps_text[64];
 u32 fps_elapsed = 0;
-f32 fps_elapsed_delta = 0;
+f32 fps_elapsed_delta = 1;
 
 
 
@@ -86,8 +86,8 @@ void game_introduction() {
     if (!hqr_get_entry_alloc(&menu_samples, HQR_RESSOURCE, HQR_MENU_SAMPLES)) {
         printf("Error: Couldn't load palette %d\n", HQR_MENU_SAMPLES);
     }
-    sample_play_hidden(HQR_MENU_SAMPLES, 0, menu_samples, 22050, 0, 0);
-    sample_play_hidden(HQR_MENU_SAMPLES, 1, menu_samples, 22050, 0, 0);
+    sample_play_hidden(0, menu_samples, 22050, 0, 0);
+    sample_play_hidden(1, menu_samples, 22050, 0, 0);
     memory_free(menu_samples);
 }
 

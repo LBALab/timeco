@@ -52,8 +52,8 @@ i32 main(i32 argc, c8 **argv) {
     system_create_surface(system, screen->front_buffer);
 
     game_init(state);
-    system->timer.last_tick = system_tick();
 
+    system->timer.last_tick = system_tick();
     while(!system->quit) {
         system->timer.tick = system_tick();
         system_events(system);
