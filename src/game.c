@@ -13,6 +13,13 @@
 #define HQR_PALETTE_MENU 5
 #define HQR_RESSOURCE "RESSOURC.HQR"
 
+#define HQR_SCREEN_ADELINE      34
+#define HQR_SCREEN_TIMECO       38
+#define HQR_SCREEN_MENU         42
+#define HQR_SCREEN_TIMEWRAP     46
+#define HQR_SCREEN_TIMECO_DEMO  50
+#define HQR_SCREEN_VIRGIN       54
+
 
 char fps_text[64];
 u32 fps_elapsed = 0;
@@ -42,22 +49,37 @@ void game_image(state_t *state, u32 index, u32 delay, i32 fade_in) {
 }
 
 void game_introduction() {
-    // if(!hqr_get_entry(state->screen.palette, "RESSOURC.HQR", HQR_PALETTE_MENU)) {
-	// 	printf("Error: Couldn't load palette\n");
-	// }
-    // system_set_palette(&state->system, state->screen.palette);
 
-    // activision.acf logo if US
-    
     sample_play(3, 22050, 0, 0);
-    game_image(state, 34, 6000, FALSE);
+    game_image(state, HQR_SCREEN_ADELINE, 6000, FALSE);
 
-    game_image(state, 38, 6000, TRUE);
-    // Virgin if JP or ASIA
+    switch(state->game_type) {
+        case TIMECO_US:
+            // play activision acf
+            break;
+        case TIMECO_JP:
+        case TIMECO_ASIA:
+            game_image(state, HQR_SCREEN_VIRGIN, 6000, TRUE);
+            break;
+        default:
+            break;
+    }
+
+    game_image(state, HQR_SCREEN_TIMECO, 6000, TRUE);
+    sample_stop_all();
+
+    switch(state->game_type) {
+        case TIMECO_DEMO:
+        case TIMECO_MCAFEE_DEMO:
+            // play tunnel acf
+            break;
+        default:
+            // play bigintro acf
+            break;
+    }
 
     // then menu > new game > then timewrap acf
-
-    game_image(state, 42, 0, TRUE);
+    game_image(state, HQR_SCREEN_MENU, 0, TRUE);
 }
 
 void game_release(state_t *state) {
