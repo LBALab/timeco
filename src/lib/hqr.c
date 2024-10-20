@@ -208,7 +208,7 @@ i32 hqr_get_hidden_entry_ptr(u8 **entry_ptr, u8 *hqr_ptr, i32 index) {
 
     // not a valid hidden entry index
     if(index >= num_hidden_entries) {
-        entry_ptr = NULL;
+        // entry_ptr = NULL;
         return 0;
     }
 
@@ -216,12 +216,13 @@ i32 hqr_get_hidden_entry_ptr(u8 **entry_ptr, u8 *hqr_ptr, i32 index) {
     offset = *(u32*)ptr;
 
     entry_size = *(u32*)(hqr_ptr + offset);
-    *entry_ptr = (u8*)malloc(entry_size * sizeof(u8));
-    if (!*entry_ptr) {
-        printf("HQR WARNING: unable to allocate entry memory!!\n");
-        return 0;
-    }
-    memcpy(*entry_ptr, hqr_ptr + offset + sizeof(hqr_hidden_entry_t), entry_size);
+    // *entry_ptr = (u8*)malloc(entry_size * sizeof(u8));
+    // if (!*entry_ptr) {
+    //     printf("HQR WARNING: unable to allocate entry memory!!\n");
+    //     return 0;
+    // }
+    // memcpy(*entry_ptr, hqr_ptr + offset + sizeof(hqr_hidden_entry_t), entry_size);
+    *entry_ptr = hqr_ptr + offset + sizeof(hqr_hidden_entry_t);
     
     return entry_size;
 }
