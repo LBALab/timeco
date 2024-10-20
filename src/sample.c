@@ -49,6 +49,13 @@ void sample_play(i32 index, i32 frequency, i32 repeat, i32 pan) {
     memory_free(sample_ptr);
 }
 
+void sample_play_hidden(i32 index, i32 hidden_index, u8* menu_samples, i32 frequency, i32 repeat, i32 pan) {
+    i32 sample_hidden_index = 0;
+    u8 *sample_ptr = NULL;
+    u32 entry_size = hqr_get_hidden_entry_ptr(&sample_ptr, menu_samples, 0);
+    sample_play_ptr(index * 100 + hidden_index, sample_ptr, entry_size, 22050, 0, 0);
+}
+
 void sample_play_ptr(i32 index, u8* sample_ptr, i32 sample_size, i32 frequency, i32 repeat, i32 pan) {
     sample_play_position(index, sample_ptr, sample_size, frequency, repeat, 0, 0, 0, -1, 0, 0, 0);
 }
