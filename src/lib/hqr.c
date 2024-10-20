@@ -5,6 +5,11 @@
 #include "hqr.h"
 #include "file_reader.h"
 
+typedef struct hqr_hidden_entry_s {
+    u32 size_file;
+    u32 compressed_size;
+    i16 compress_type;
+} hqr_hidden_entry_t;
 
 file_reader_t fr;
 
@@ -36,7 +41,7 @@ void hqr_entry_decompress(u8 * dst, u8 * src, i32 decompsize, i32 mode) {
     } while (decompsize);
 }
 
-void hqr_entry_decompress_lz(u8 * dst, u8 * src, i32 decompsize, i32 mode) {
+void hqr_entry_decompress_lz(u8 *dst, u8 *src, i32 decompsize, i32 mode) {
     u16 offset;
     i32 lenght;
     u8 *ptr;
@@ -74,7 +79,7 @@ void hqr_entry_decompress_lz(u8 * dst, u8 * src, i32 decompsize, i32 mode) {
     }
 }
 
-i32 hqr_get_entry(u8 * ptr, c8 *filename, i32 index) {
+i32 hqr_get_entry(u8 *ptr, c8 *filename, i32 index) {
     u32 headerSize;
     u32 offsetToData;
     u32 realSize;
@@ -190,4 +195,25 @@ i32 hqr_get_entry_alloc(u8 ** ptr, c8 *filename, i32 index) {
     hqr_get_entry(*ptr, filename, index);
 
     return size;
+}
+
+i32 hqr_get_hidden_entry_ptr(u8 *entry_ptr, void *hqr_ptr, i32 index)
+{
+    u32 num_hidden_entries;
+    u32 offset;
+
+    num_hidden_entries = *(u32*)hqr_ptr / 4;
+
+    // not a valid hidden entry index
+    if(index >= num_hidden_entries) {
+        entry_ptr = NULL;
+        return 0;
+    }
+
+    entry_ptr = (u8*)hqr_ptr + index * 4;
+    offset = *(u32*)entry_ptr;
+
+    entry_ptr = (u8*)hqr_ptr + offset + sizeof(hqr_hidden_entry_t);
+    
+    return 1;
 }
