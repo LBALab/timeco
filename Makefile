@@ -50,3 +50,6 @@ clean-all:
 
 clean:
 	rm -f $(BIN)/timeco
+
+serve:
+	bundle exec jekyll serve --watch
