@@ -52,3 +52,8 @@ void swap(i32 *a, i32 *b);
 void swap_u8(u8 *a, u8 *b);
 f32 min(f32 a, f32 b);
 f32 max(f32 a, f32 b);
+
+u16 read_u16(const u8* ptr);
+i16 read_s16(const u8* ptr);
+u32 read_u32(const u8* ptr, int skip);
+i16 read_xy_offset(const u8* ptr, int stride);

@@ -8,6 +8,7 @@
 #include "game_detection.h"
 #include "renderer.h"
 #include "sample.h"
+#include "acf.h"
 
 
 #define HQR_PALETTE_MENU 5
@@ -21,6 +22,10 @@
 #define HQR_SCREEN_TIMEWRAP     46
 #define HQR_SCREEN_TIMECO_DEMO  50
 #define HQR_SCREEN_VIRGIN       54
+
+#define ACF_ACTIVISION          "SEQUENCE/ACTIVISI.ACF"
+#define ACF_INTRO               "SEQUENCE/BIGINTRO.ACF"
+#define ACF_TUNNEL              "SEQUENCE/TUNNEL.ACF"
 
 
 char fps_text[64];
@@ -56,7 +61,7 @@ void game_introduction() {
 
     switch(state->game_type) {
         case TIMECO_US:
-            // play activision acf
+            acf_play((const u8 *)ACF_ACTIVISION);
             break;
         case TIMECO_JP:
         case TIMECO_ASIA:
@@ -72,10 +77,10 @@ void game_introduction() {
     switch(state->game_type) {
         case TIMECO_DEMO:
         case TIMECO_MCAFEE_DEMO:
-            // play tunnel acf
+            acf_play((const u8 *)ACF_TUNNEL);
             break;
         default:
-            // play bigintro acf
+            acf_play((const u8 *)ACF_INTRO);
             break;
     }
 
