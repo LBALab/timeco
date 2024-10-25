@@ -120,7 +120,7 @@ u8* unaligned_stream = NULL;
 
 
 
-void set_pixel(i32 x, i32 y, u8 colour) {
+inline void set_pixel(i32 x, i32 y, u8 colour) {
     current_tile[x + (y * frame_width)] = colour;
 }
 

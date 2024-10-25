@@ -25,3 +25,4 @@ permalink: /time-commando/articles
 * [Sega Saturn Magazine Articles](https://segaretro.org/Time_Commando/Magazine_articles)
 * [Gamespot Review](https://www.gamespot.com/reviews/time-commando-review/1900-2534989/#comments-block-32375399)
 * [Metacritic](https://www.metacritic.com/game/time-commando/)
+* [Reference Images for Time Commando Remake](https://co.pinterest.com/mapedorr/time-commando-remake/)
