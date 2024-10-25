@@ -32,7 +32,7 @@ Originaly developed by Adeline Software International in 1994 (LBA1), Time Comma
 ## Licence
 This documentation is licensed under MIT.
 
-The source code for TimeCo is under GNU General Public License v2.0.
+The source code for TimeCo fan-made reimplementation is under GNU General Public License v2.0.
 
 The source code for both LBA1 and LBA2 released by [2.21] has been licensed under the GNU General Public License.
 
