@@ -2,6 +2,7 @@
 
 #include "acf.h"
 #include "lib/common.h"
+#include "lib/file_reader.h"
 
 // based on:
 // https://blog.defence-force.org/index.php?page=articles&ref=ART82
@@ -32,11 +33,13 @@ enum chunk_type_e {
     CHUNK_TYPE_SAL_COMP = 16,
 };
 
+#pragma pack(1)
 typedef struct {
     u32 biggest_frame_size;
     u8 frame_size_in_sectors;
 } frame_len_t;
 
+#pragma pack(1)
 typedef struct {
     u32 colour_offset;
     u8 opcodes[30];
@@ -56,6 +59,7 @@ typedef struct {
     u32 compressor; // 0 - ACF, 1 - XCF
 } format_t;
 
+#pragma pack(1)
 typedef struct {
     u8 red;
     u8 green;
@@ -78,6 +82,7 @@ typedef struct {
 } camera_t;
 
 
+#pragma pack(1)
 typedef struct {
     u8 name[8];
     u32 size;
@@ -630,6 +635,129 @@ void block_bank_1_decode_3() {
     }
 }
 
-void acf_play(const u8 *filename) {
+void print_chunk_name(chunk_t* chunk) {
+    printf("\n[");
+    for (i32 i = 0; i < 8; i++) {
+        if (chunk->name[i] == ' ') break;
+        printf("%c", chunk->name[i]);
+    }
+    printf("] (%d)\n", chunk->size);
+}
 
+void acf_play(const u8 *filename) {
+    file_reader_t fr;
+    u8* file_ptr = NULL;
+    u8* data_ptr = NULL;
+
+    if (!fropen2(&fr, (char*)filename, "rb")) {
+        printf("ACF: %s can't be found !\n", filename);
+        exit(1);
+    }
+    i32 file_size = frsize(&fr);
+
+    file_ptr = (u8*)malloc(file_size * sizeof(u8));
+    frread(&fr, file_ptr, file_size);
+
+    frclose(&fr);
+
+    current_chunk = (chunk_t*)file_ptr;
+    printf("current_chunk: %p\n", current_chunk);
+    chunk_t *last_chunk = (chunk_t*)(file_ptr + file_size);
+    printf("last_chunk: %p\n", last_chunk);
+    printf("last_chunk: name %s (%d)\n", last_chunk->name, last_chunk->size);
+
+    printf("\nACF: %s\n", filename);
+    printf("File size: %d\n", file_size / 1024 / 1024);
+
+    while (current_chunk < last_chunk) {
+        enum chunk_type_e chunk_type = CHUNK_TYPE_UNKNOWN;
+        print_chunk_name(current_chunk);
+
+        if (memcmp("KeyFrame", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_KEYFRAME;
+        else if (memcmp("DltFrame", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_DLTFRAME;
+        else if (memcmp("Format  ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_FORMAT;
+        else if (memcmp("Palette ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_PALETTE;
+        else if (memcmp("SoundBuf", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SOUNDBUF;
+        else if (memcmp("SoundFrm", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SOUNDFRM;
+        else if (memcmp("SoundEnd", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SOUNDEND;
+        else if (memcmp("End     ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_END;
+        // else if (memcmp("NulChunk", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_NULCHUNK;
+        // else if (memcmp("FrameLen", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_FRAMELEN;
+        // else if (memcmp("SAL_STRT", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_STRT;
+        // else if (memcmp("SAL_PART", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_PART;
+        // else if (memcmp("SAL_END ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_END;
+        // else if (memcmp("SAL_COMP", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_COMP;
+        // else if (memcmp("Recouvre", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_COVERS;
+        // else if (memcmp("Camera  ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_CAMERA;
+
+        if (chunk_type == CHUNK_TYPE_END) {
+            break;
+        }
+
+        data_ptr = (u8 *)((u8 *)current_chunk + sizeof(chunk_t));
+
+        // process the chunk
+        switch (chunk_type) {
+            case CHUNK_TYPE_FORMAT:
+                format = (format_t*)(data_ptr);
+                printf("Struct Size: %d\n", format->struct_size);
+                printf("Width: %d\n", format->width);
+                printf("Height: %d\n", format->height);
+                printf("Frame size: %d\n", format->frame_size);
+                printf("Key size: %d\n", format->key_size);
+                printf("Key rate: %d\n", format->key_rate);
+                printf("Play rate: %d\n", format->play_rate);
+                printf("Sampling rate: %d\n", format->sampling_rate);
+                printf("Sample type: %d\n", format->sample_type);
+                printf("Sample flags: %d\n", format->sample_flags);
+                printf("Compressor: %d\n", format->compressor);
+                break;
+            case CHUNK_TYPE_PALETTE:
+                palette = (palette_t*)(data_ptr);
+                break;
+            case CHUNK_TYPE_FRAMELEN:
+                frame_len = (frame_len_t*)(data_ptr);
+                printf("Biggest frame size: %d\n", frame_len->biggest_frame_size);
+                printf("Frame size in sectors: %d\n", frame_len->frame_size_in_sectors);
+                break;
+            case CHUNK_TYPE_CAMERA:
+                camera = (camera_t*)(data_ptr);
+                printf("Camera: x=%d y=%d z=%d target_x=%d target_y=%d target_z=%d roll=%d fov=%d\n", camera->x, camera->y, camera->z, camera->target_x, camera->target_y, camera->target_z, camera->roll, camera->fov);
+                break;
+            case CHUNK_TYPE_KEYFRAME:
+                break;
+            case CHUNK_TYPE_DLTFRAME:
+                break;
+            case CHUNK_TYPE_SOUNDBUF:
+                // u8 *sound_buffer = (u8*)malloc(current_chunk->size);
+                // memcpy(sound_buffer, data_ptr, current_chunk->size);
+                // printf("Sound buffer size: %d\n", current_chunk->size);
+                // printf("Sound buffer: %s\n", sound_buffer);
+                break;
+            case CHUNK_TYPE_SOUNDFRM:
+                break;
+            case CHUNK_TYPE_SOUNDEND:
+                break;
+            // case CHUNK_TYPE_COVERS:
+            //     break;
+            // case CHUNK_TYPE_SAL_STRT:
+            //     break;
+            // case CHUNK_TYPE_SAL_PART:
+            //     break;
+            // case CHUNK_TYPE_SAL_END:
+            //     break;
+            // case CHUNK_TYPE_SAL_COMP:
+            //     break;
+            case CHUNK_TYPE_NULCHUNK:
+                break;
+            default:
+                printf("Unknown chunk type \n");
+                break;
+        }
+        printf("%p\n", current_chunk);
+        current_chunk = (chunk_t*)((u8*)current_chunk + sizeof(chunk_t) + current_chunk->size);
+        printf("%p\n", current_chunk);
+    }
+
+    free(file_ptr);
 }

@@ -14,17 +14,18 @@
 
 typedef struct file_reader_s {
     FILE* fd;
-    u8 buffer[BUFFER_SIZE];
-    u32 bufferPos;
-    u32 currSector;
+    // u8 buffer[BUFFER_SIZE];
+    // u32 bufferPos;
+    // u32 currSector;
 } file_reader_t;
 
 
-void frfeed(file_reader_t* fr);
+// void frfeed(file_reader_t* fr);
 void frread(file_reader_t* fr, void* destPtr, u32 size);
 void frseek(file_reader_t* fr, u32 seekPosition);
 i32 fropen2(file_reader_t* fr, char* filename, const char* mode);
 void frwrite(file_reader_t* fr, void* destPtr, u32 size, u32 count);
 void frclose(file_reader_t* fr);
+i32 frsize(file_reader_t* fr);
 
 #endif
