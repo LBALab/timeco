@@ -114,11 +114,11 @@ palette_t* palette = NULL;
 frame_len_t* frame_len = NULL;
 camera_t* camera = NULL;
 
-u8* previous_buffer = NULL;
-u8* previous_frame_buffer = NULL;
-u8* previous_tile = NULL;
-u8* current_buffer = NULL;
-u8* current_tile = NULL;
+u8* previous_buffer;
+u8* previous_frame_buffer;
+u8* previous_tile;
+u8* current_buffer;
+u8* current_tile;
 
 u8* aligned_stream = NULL;
 u8* unaligned_stream = NULL;
@@ -635,6 +635,114 @@ void block_bank_1_decode_3() {
     }
 }
 
+void decompreess_frame(frame_data_t *frame_data) {
+    unaligned_stream = (u8*)frame_data + frame_data->colour_offset;
+    aligned_stream = (u8*)frame_data->opcodes + (frame_height / 8) * 30;
+
+    i32 opcode = -1;
+    const u8* opcode_ptr = frame_data->opcodes;
+
+    for (i32 y = 0; y < frame_height / 8; y++) {
+        for (i32 x = 0; x < frame_width / 8; x++) {
+            if (opcode == -1) {
+                opcode = ((*(i32*)opcode_ptr) | 0xff000000);
+                opcode_ptr += 3;
+            }
+
+            switch (opcode & 63) {
+                case 0: raw_tile_decode(); break;
+
+                case 1: zero_motion_decode(); break;
+                case 2: zero_motion_decode(); update_4(); break;
+                case 3: zero_motion_decode(); update_8(); break;
+                case 4: zero_motion_decode(); update_16(); break;
+
+                case 5: short_motion_8_decode(); break;
+                case 6: short_motion_8_decode(); update_4(); break;
+                case 7: short_motion_8_decode(); update_8(); break;
+                case 8: short_motion_8_decode(); update_16(); break;
+
+                case 9:  motion_8_decode(); break;
+                case 10: motion_8_decode(); update_4(); break;
+                case 11: motion_8_decode(); update_8(); break;
+                case 12: motion_8_decode(); update_16(); break;
+
+                case 13: short_motion_4_decode(); break;
+                case 14: short_motion_4_decode(); update_4(); break;
+                case 15: short_motion_4_decode(); update_8(); break;
+                case 16: short_motion_4_decode(); update_16(); break;
+
+                case 17: motion_4_decode(); break;
+                case 18: motion_4_decode(); update_4(); break;
+                case 19: motion_4_decode(); update_8(); break;
+                case 20: motion_4_decode(); update_16(); break;
+
+                case 21: single_colour_fill_decode(); break;
+                case 22: single_colour_fill_decode(); update_4(); break;
+                case 23: single_colour_fill_decode(); update_8(); break;
+                case 24: single_colour_fill_decode(); update_16(); break;
+
+                case 25: four_color_fill_decode(); break;
+                case 26: four_color_fill_decode(); update_4(); break;
+                case 27: four_color_fill_decode(); update_8(); break;
+                case 28: four_color_fill_decode(); update_16(); break;
+
+                case 29: one_bit_tile_decode(); break;
+                case 30: two_bit_tile_decode(); break;
+                case 31: three_bit_tile_decode(); break;
+                case 32: four_bit_tile_decode(); break;
+
+                case 33: one_bit_tile_decode(); break;
+                case 34: two_bit_tile_decode(); break;
+                case 35: three_bit_tile_decode(); break;
+
+                case 36: cross_decode(); break;
+                case 37: prime_decode(); break;
+
+                case 38: one_bank_tile_decode(); break;
+                case 39: two_banks_tile_decode(); break;
+
+                case 40: block_decode_horizontal(); break;
+                case 41: block_decode_vertical(); break;
+                case 42: block_decode_2(); break;
+                case 43: block_decode_3(); break;
+
+                case 44: block_bank_1_decode_horizontal(); break;
+                case 45: block_bank_1_decode_vertical(); break;
+                case 46: block_bank_1_decode_2(); break;
+                case 47: block_bank_1_decode_3(); break;
+
+                case 48: ro_motion_8_decode(); break;
+                case 49: ro_motion_8_decode(); update_4(); break;
+                case 50: ro_motion_8_decode(); update_8(); break;
+                case 51: ro_motion_8_decode(); update_16(); break;
+
+                case 52: rc_motion_8_decode(); break;
+                case 53: rc_motion_8_decode(); update_4(); break;
+                case 54: rc_motion_8_decode(); update_8(); break;
+                case 55: rc_motion_8_decode(); update_16(); break;
+
+                case 56: ro_motion_4_decode(); break;
+                case 57: ro_motion_4_decode(); update_4(); break;
+                case 58: ro_motion_4_decode(); update_8(); break;
+                case 59: ro_motion_4_decode(); update_16(); break;
+
+                case 60: rc_motion_4_decode(); break;
+                case 61: rc_motion_4_decode(); update_4(); break;
+                case 62: rc_motion_4_decode(); update_8(); break;
+                case 63: rc_motion_4_decode(); update_16(); break;
+            }
+
+            opcode >>= 6;
+
+            previous_tile += 8;
+            current_tile += 8;
+        }
+        previous_tile += frame_width * 7;
+        current_tile  += frame_width * 7;
+    }
+}
+
 void print_chunk_name(chunk_t* chunk) {
     printf("\n[");
     for (i32 i = 0; i < 8; i++) {
@@ -659,6 +767,12 @@ void acf_play(const u8 *filename) {
     frread(&fr, file_ptr, file_size);
 
     frclose(&fr);
+
+    u8* previous_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    u8* previous_frame_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    u8* previous_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    u8* current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    u8* current_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
 
     current_chunk = (chunk_t*)file_ptr;
     printf("current_chunk: %p\n", current_chunk);
@@ -725,8 +839,9 @@ void acf_play(const u8 *filename) {
                 printf("Camera: x=%d y=%d z=%d target_x=%d target_y=%d target_z=%d roll=%d fov=%d\n", camera->x, camera->y, camera->z, camera->target_x, camera->target_y, camera->target_z, camera->roll, camera->fov);
                 break;
             case CHUNK_TYPE_KEYFRAME:
-                break;
             case CHUNK_TYPE_DLTFRAME:
+                frame_data_t* frame_data = (frame_data_t*)(data_ptr);
+                decompreess_frame(frame_data);
                 break;
             case CHUNK_TYPE_SOUNDBUF:
                 // u8 *sound_buffer = (u8*)malloc(current_chunk->size);
@@ -758,6 +873,10 @@ void acf_play(const u8 *filename) {
         current_chunk = (chunk_t*)((u8*)current_chunk + sizeof(chunk_t) + current_chunk->size);
         printf("%p\n", current_chunk);
     }
-
+    free(previous_buffer);
+    free(previous_frame_buffer);
+    free(previous_tile);
+    free(current_buffer);
+    free(current_tile);
     free(file_ptr);
 }
