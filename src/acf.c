@@ -781,6 +781,7 @@ void acf_play(state_t *state, const u8 *filename) {
     file_reader_t fr;
     u8* file_ptr = NULL;
     u8* data_ptr = NULL;
+    i32 play_rate = 12;
 
     if (!fropen2(&fr, (char*)filename, "rb")) {
         printf("ACF: %s can't be found !\n", filename);
@@ -833,8 +834,8 @@ void acf_play(state_t *state, const u8 *filename) {
                 format = (format_t*)(data_ptr);
                 memset(current_buffer, 0, frame_width * frame_height);
                 memset(previous_buffer, 0, frame_width * frame_height);
-                if(!format->play_rate) {
-                    format->play_rate = 12;
+                if(format->play_rate) {
+                    play_rate = format->play_rate;
                 }
                 printf("Struct Size: %d\n", format->struct_size);
                 printf("Width: %d\n", format->width);
@@ -870,10 +871,9 @@ void acf_play(state_t *state, const u8 *filename) {
         }
         current_chunk = (chunk_t*)((u8*)current_chunk + sizeof(chunk_t) + current_chunk->size);
 
-        if (format) {
-            system_delay_events(&state->system, 1000 / format->play_rate);
-        }
+        system_delay_events(&state->system, 1000 / play_rate);
     }
     free(current_buffer);
+    free(previous_buffer);
     free(file_ptr);
 }
