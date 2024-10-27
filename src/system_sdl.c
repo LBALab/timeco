@@ -54,6 +54,9 @@ inline void system_delay(u32 ms) {
 void system_delay_events(system_t *system, u32 ms) {
     u32 start = system_tick();
     while (system_tick() - start < ms) {
+        if (system->actions[ACTION_SKIP] || system->quit) {
+            break;
+        }
         system_events(system);
         system_delay(1);
     }

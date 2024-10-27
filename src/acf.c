@@ -441,11 +441,11 @@ void two_banks_tile_decode() {
     unaligned_stream++;
 
     for (u32 y = 0; y < 8; y++) {
-        u32 part1 = *(i32*)aligned_stream;		// On r‚cupŠre ainsi 5 octets...
+        u32 part1 = *(i32*)aligned_stream;
         u32 part2 = *(i32*)(aligned_stream + 4);
         aligned_stream += 5;
         for (u32 x = 0; x < 8; x++) {
-            set_pixel(x, y, bank[(part1 & 16) >> 4] + (part1 & 15));   // Bit 4: Banque … utiliser / Bits 0-3:Couleur
+            set_pixel(x, y, bank[(part1 & 16) >> 4] + (part1 & 15));
             part1 >>= 5;
             part1 |= (part2 << 27);
             part2 >>= 5;
@@ -517,7 +517,7 @@ void block_decode_3() {
 
 void block_bank_1_decode_horizontal() {
     u8 last_color = 0;
-    u8 bank = (*unaligned_stream) << 4;	// R‚cupŠre la banque
+    u8 bank = (*unaligned_stream) << 4;
     u8 flag = 1;
 
     for (i32 y = 0; y < 8; y++) {
@@ -544,7 +544,7 @@ void block_bank_1_decode_horizontal() {
 
 void block_bank_1_decode_vertical() {
     u8 last_color = 0;
-    u8 bank = (*unaligned_stream) << 4;	// get the bank back
+    u8 bank = (*unaligned_stream) << 4;
     u8 flag = 1;
 
     for (i32 x = 0; x < 8; x++) {
@@ -571,7 +571,7 @@ void block_bank_1_decode_vertical() {
 
 void block_bank_1_decode_2() {
     u8 last_color = 0;
-    u8 bank = (*unaligned_stream) << 4;	// R‚cupŠre la banque
+    u8 bank = (*unaligned_stream) << 4;
     u8 flag = 1;
     u32* offsets = diagonal_offsets_1;
 
@@ -599,7 +599,7 @@ void block_bank_1_decode_2() {
 
 void block_bank_1_decode_3() {
     u8 last_color = 0;
-    u8 bank = (*unaligned_stream) << 4;	// Get the bank number
+    u8 bank = (*unaligned_stream) << 4;
     u8 flag = 1;
     u32* offsets = diagonal_offsets_2;
 
@@ -640,27 +640,11 @@ void scale_2x(state_t *state) {
             memcpy(dest + dest_index + 640, dest + dest_index, 2);
         }
     }
-
-    // for (i32 i = 0; i < frame_height; i++) {
-    //     for (i32 j = 0; j < frame_width; j++) {
-    //         *(dest++) = *(source);
-    //         *(dest++) = *(source++);
-    //     }
-    //     if (i % (2)) {
-    //         memcpy(dest, dest - 640 / 2, frame_width*2);
-    //         dest += frame_width * 2;
-    //     }
-    //     if (i % 10) {
-    //         memcpy(dest, dest - 640 / 2, frame_width*2);
-    //         dest += frame_width * 2;
-    //     }
-    // }
 }
 
 void decompreess_frame(state_t *state, frame_data_t *frame_data) {
     previous_tile = previous_frame_buffer = previous_buffer;
     current_tile = current_buffer;
-    // memset(current_tile, 0, frame_width * frame_height);
 
     unaligned_stream = (u8*)frame_data + frame_data->colour_offset;
     aligned_stream = (u8*)frame_data->opcodes + (frame_height / 8) * 30;
@@ -813,6 +797,9 @@ void acf_play(state_t *state, const u8 *filename) {
 
     while (current_chunk < last_chunk) {
         system_events(&state->system);
+        if (state->system.actions[ACTION_SKIP] || state->system.quit) {
+            break;
+        }
 
         enum chunk_type_e chunk_type = CHUNK_TYPE_UNKNOWN;
         print_chunk_name(current_chunk);

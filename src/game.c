@@ -56,8 +56,8 @@ void game_image(state_t *state, u32 index, u32 delay, i32 fade_in) {
 }
 
 void game_introduction() {
-    // sample_play(3, 22050, 0, 0);
-    // game_image(state, HQR_SCREEN_ADELINE, 6000, FALSE);
+    sample_play(3, 22050, 0, 0);
+    game_image(state, HQR_SCREEN_ADELINE, 6000, FALSE);
 
     switch(state->game_type) {
         case TIMECO_US:
@@ -71,18 +71,18 @@ void game_introduction() {
             break;
     }
 
-    // game_image(state, HQR_SCREEN_TIMECO, 6000, TRUE);
-    // sample_stop_all();
+    game_image(state, HQR_SCREEN_TIMECO, 6000, TRUE);
+    sample_stop_all();
 
-    // switch(state->game_type) {
-    //     case TIMECO_DEMO:
-    //     case TIMECO_MCAFEE_DEMO:
-    //         acf_play(state, (const u8 *)ACF_TUNNEL);
-    //         break;
-    //     default:
-    //         acf_play(state, (const u8 *)ACF_INTRO);
-    //         break;
-    // }
+    switch(state->game_type) {
+        case TIMECO_DEMO:
+        case TIMECO_MCAFEE_DEMO:
+            acf_play(state, (const u8 *)ACF_TUNNEL);
+            break;
+        default:
+            acf_play(state, (const u8 *)ACF_INTRO);
+            break;
+    }
 
     // then menu > new game > then timewrap acf
     game_image(state, HQR_SCREEN_MENU, 0, TRUE);

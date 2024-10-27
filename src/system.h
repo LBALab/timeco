@@ -5,6 +5,9 @@
 #include "lib/common.h"
 
 
+#define ACTION_SKIP 27
+
+
 typedef struct {
     u32 tick;
     u32 last_tick;
