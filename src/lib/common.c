@@ -70,6 +70,12 @@ inline void swap_u8(u8 *a, u8 *b) {
     *a = temp;
 }
 
+inline void swap_u8_ptr(u8 **a, u8 **b) {
+    u8 *temp = *b;
+    *b = *a;
+    *a = temp;
+}
+
 inline f32 min(f32 a, f32 b) {
     return a < b ? a : b;
 }

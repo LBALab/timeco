@@ -50,6 +50,7 @@ void array_push(array_s *array, void* item);
 i32 abs(i32 value);
 void swap(i32 *a, i32 *b);
 void swap_u8(u8 *a, u8 *b);
+void swap_u8_ptr(u8 **a, u8 **b);
 f32 min(f32 a, f32 b);
 f32 max(f32 a, f32 b);
 
