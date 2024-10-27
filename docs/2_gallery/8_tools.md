@@ -32,6 +32,24 @@ images:
 - image_path: assets/images/tools/modeleditor_4.png
   title: Model Editor 4
   link: assets/images/tools/modeleditor_4.png
+- image_path: assets/images/tools/animit_011.png
+  title: Model 1
+  link: assets/images/tools/animit_011.png
+- image_path: assets/images/tools/animit_012.png
+  title: Model 2
+  link: assets/images/tools/animit_012.png
+- image_path: assets/images/tools/animit_013.png
+  title: Model 3
+  link: assets/images/tools/animit_013.png
+- image_path: assets/images/tools/animit_014.png
+  title: Model 4
+  link: assets/images/tools/animit_014.png
+- image_path: assets/images/tools/animit_015.png
+  title: Model 5
+  link: assets/images/tools/animit_015.png
+- image_path: assets/images/tools/stanley_animit_closeup.png
+  title: Model 6
+  link: assets/images/tools/stanley_animit_closeup.png
 - image_path: assets/images/tools/lba2-animations.jpg
   title: LBA2 Animations
   link: assets/images/tools/lba2-animations.jpg
