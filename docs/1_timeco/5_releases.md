@@ -91,7 +91,7 @@ permalink: /time-commando/releases
 ### 2012 Release
 * Published by: Didier Chanfray SARL
 * Developed by: Adeline Software International
-* Distributed by: GOG Limited, Steam
+* Distributed by: GOG Limited
 * Countries: Worldwide
 
 ### 2022 Release
