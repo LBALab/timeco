@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug TimeCo",
+            "program": "${workspaceFolder}/bin/us/timeco",
+            "args": [],
+            "cwd": "${workspaceFolder}/bin/us/",
+            "preLaunchTask": "build-timeco"
+        }
+    ]
+}

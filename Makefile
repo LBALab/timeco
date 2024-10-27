@@ -2,7 +2,7 @@ GAME := us
 
 CC = $(shell brew --prefix llvm)/bin/clang
 
-CFLAGS = -std=c99 -Wall -Wno-missing-braces -DDEBUG
+CFLAGS = -std=c99 -Wall -Wno-missing-braces -g -DDEBUG
 LDFLAGS =
 
 ROOT = ./

@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "state.h": "c",
+        "common.h": "c",
+        "__config": "c",
+        "__hash_table": "c",
+        "map": "c",
+        "optional": "c",
+        "unordered_map": "c",
+        "file_reader.h": "c",
+        "platform_mixer.h": "c"
+    }
+}

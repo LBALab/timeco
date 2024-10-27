@@ -239,9 +239,9 @@ void rc_motion_4_decode() {
 
 // load one byte, apply it to the entire tile
 void single_colour_fill_decode() {
-    u8 colorTile = *unaligned_stream++;
+    u8 colour_tile = *unaligned_stream++;
     for (i32 y = 0; y < 8; y++) {
-        memset(current_tile + y * frame_width, colorTile, 8);
+        memset(current_tile + y * frame_width, colour_tile, 8);
     }
 }
 
@@ -768,11 +768,11 @@ void acf_play(const u8 *filename) {
 
     frclose(&fr);
 
-    u8* previous_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    u8* previous_frame_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    u8* previous_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    u8* current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    u8* current_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    previous_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    previous_frame_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    previous_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    // current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    current_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
 
     current_chunk = (chunk_t*)file_ptr;
     printf("current_chunk: %p\n", current_chunk);
@@ -876,7 +876,9 @@ void acf_play(const u8 *filename) {
     free(previous_buffer);
     free(previous_frame_buffer);
     free(previous_tile);
-    free(current_buffer);
+    // if (current_buffer) {
+    //     free(current_buffer);
+    // }
     free(current_tile);
     free(file_ptr);
 }
