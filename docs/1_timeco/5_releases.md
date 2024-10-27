@@ -87,7 +87,7 @@ permalink: /time-commando/releases
     <img src="{{ site.baseurl }}/assets/images/covers/cd_front_portuguese-spanish.jpeg" alt="Creative Labs Multimedia CD" style="border-radius: 10px" />
 </a>
 
-## PC, Linux, Macintosh
+## PC Windows, Linux, Macintosh
 ### 2012 Release
 * Published by: Didier Chanfray SARL
 * Developed by: Adeline Software International
