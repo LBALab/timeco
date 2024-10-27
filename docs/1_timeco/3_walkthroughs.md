@@ -2,7 +2,7 @@
 title: Walkthroughs
 layout: home
 parent: Time Commando
-nav_order: 4
+nav_order: 3
 permalink: /time-commando/walkthroughs
 ---
 
