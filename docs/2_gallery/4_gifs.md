@@ -26,6 +26,9 @@ images:
 - image_path: assets/images/gifs/tunel_stanley.gif
   title: Stanley in the Tunnel
   link: assets/images/gifs/tunel_stanley.gif
+- image_path: assets/images/gifs/main-vortex-anim.gif
+  title: Main Vortex Animation
+  link: assets/images/gifs/main-vortex-anim.gif
 ---
 
 # Gifs

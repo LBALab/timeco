@@ -32,6 +32,12 @@ images:
 - image_path: assets/images/renders/Time_Commando-vs Ninja.jpg
   title: Time Commando vs Ninja
   link: assets/images/renders/Time_Commando-vs Ninja.jpg
+- image_path: assets/images/renders/stan3.png
+  title: Stanley
+  link: assets/images/renders/stan3.png
+- image_path: assets/images/renders/4MCP2.png
+  title: Virtual Reality
+  link: assets/images/renders/4MCP2.png
 - image_path: assets/images/renders/title_screen.png
   title: Title Screen
   link: assets/images/renders/title_screen.png
@@ -47,6 +53,12 @@ images:
 - image_path: assets/images/renders/sailboat_crows_nest.jpg
   title: Sailboat Crows Nest
   link: assets/images/renders/sailboat_crows_nest.jpg
+- image_path: assets/images/renders/table.png
+  title: Table
+  link: assets/images/renders/table.png
+- image_path: assets/images/renders/playing.png
+  title: Playing
+  link: assets/images/renders/playing.png
 ---
 
 # HD Renders

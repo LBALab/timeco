@@ -17,6 +17,9 @@ images:
 - image_path: assets/images/promotional_art/s-l1600_4.jpg
   title: Promotional Art 4
   link: assets/images/promotional_art/s-l1600_4.jpg
+- image_path: assets/images/promotional_art/tumblr_1280.jpg
+  title: Flyier
+  link: assets/images/promotional_art/tumblr_1280.jpg
 - image_path: assets/images/promotional_art/pc_team_demo_version.jpg
   title: PC Team Demo Version
   link: assets/images/promotional_art/pc_team_demo_version.jpg
@@ -38,6 +41,9 @@ images:
 - image_path: assets/images/promotional_art/postcard_indian_canoo_trip.jpg
   title: Postcard Indian Canoo Trip
   link: assets/images/promotional_art/postcard_indian_canoo_trip.jpg
+- image_path: assets/images/promotional_art/43241TimeCommando_9606_.jpg
+  title: Time Commando
+  link: assets/images/promotional_art/43241TimeCommando_9606_.jpg
 ---
 
 # Promotional Art
