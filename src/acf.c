@@ -1,8 +1,9 @@
 #include <string.h>
 
-#include "acf.h"
 #include "lib/common.h"
 #include "lib/file_reader.h"
+
+#include "acf.h"
 
 // based on:
 // https://blog.defence-force.org/index.php?page=articles&ref=ART82
@@ -59,17 +60,6 @@ typedef struct {
     u32 compressor; // 0 - ACF, 1 - XCF
 } format_t;
 
-#pragma pack(1)
-typedef struct {
-    u8 red;
-    u8 green;
-    u8 blue;
-} palette_entry_t;
-
-typedef struct {
-    palette_entry_t entries[256];
-} palette_t;
-
 typedef struct {
     i32 x;
     i32 y;
@@ -110,9 +100,9 @@ i32 frame_number = 0;
 
 chunk_t* current_chunk = NULL;
 format_t* format = NULL;
-palette_t* palette = NULL;
 frame_len_t* frame_len = NULL;
 camera_t* camera = NULL;
+u8 palette[256 * 3];
 
 u8* previous_buffer;
 u8* previous_frame_buffer;
@@ -635,7 +625,43 @@ void block_bank_1_decode_3() {
     }
 }
 
-void decompreess_frame(frame_data_t *frame_data) {
+void scale_2x(state_t *state) {
+    u8* source = (u8*)current_buffer;
+    u8* dest = (u8*)state->screen.back_buffer;
+
+    // scale 2x current buffer of 320x240 to 640x480
+    for (int y = 0; y < 240; ++y) {
+        for (int x = 0; x < 320; ++x) {
+            u8 pixel = source[y * 320 + x];
+            int dest_index = (y * 2 * 640) + (x * 2);
+
+            dest[dest_index] = pixel;
+            dest[dest_index + 1] = pixel;
+            memcpy(dest + dest_index + 640, dest + dest_index, 2);
+        }
+    }
+
+    // for (i32 i = 0; i < frame_height; i++) {
+    //     for (i32 j = 0; j < frame_width; j++) {
+    //         *(dest++) = *(source);
+    //         *(dest++) = *(source++);
+    //     }
+    //     if (i % (2)) {
+    //         memcpy(dest, dest - 640 / 2, frame_width*2);
+    //         dest += frame_width * 2;
+    //     }
+    //     if (i % 10) {
+    //         memcpy(dest, dest - 640 / 2, frame_width*2);
+    //         dest += frame_width * 2;
+    //     }
+    // }
+}
+
+void decompreess_frame(state_t *state, frame_data_t *frame_data) {
+    previous_tile = previous_frame_buffer = previous_buffer;
+    current_tile = current_buffer;
+    // memset(current_tile, 0, frame_width * frame_height);
+
     unaligned_stream = (u8*)frame_data + frame_data->colour_offset;
     aligned_stream = (u8*)frame_data->opcodes + (frame_height / 8) * 30;
 
@@ -741,10 +767,17 @@ void decompreess_frame(frame_data_t *frame_data) {
         previous_tile += frame_width * 7;
         current_tile  += frame_width * 7;
     }
+
+    swap_u8(current_buffer, previous_buffer);
+
+    scale_2x(state);
+    screen_flip(&state->screen);
+    system_blit(&state->system);
+    system_flip(&state->system);
 }
 
 void print_chunk_name(chunk_t* chunk) {
-    printf("\n[");
+    printf("[");
     for (i32 i = 0; i < 8; i++) {
         if (chunk->name[i] == ' ') break;
         printf("%c", chunk->name[i]);
@@ -752,7 +785,7 @@ void print_chunk_name(chunk_t* chunk) {
     printf("] (%d)\n", chunk->size);
 }
 
-void acf_play(const u8 *filename) {
+void acf_play(state_t *state, const u8 *filename) {
     file_reader_t fr;
     u8* file_ptr = NULL;
     u8* data_ptr = NULL;
@@ -768,22 +801,19 @@ void acf_play(const u8 *filename) {
 
     frclose(&fr);
 
-    previous_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    previous_frame_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    previous_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    // current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    current_tile = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
+    previous_buffer = current_buffer;
+    current_tile = current_buffer;
 
     current_chunk = (chunk_t*)file_ptr;
-    printf("current_chunk: %p\n", current_chunk);
     chunk_t *last_chunk = (chunk_t*)(file_ptr + file_size);
-    printf("last_chunk: %p\n", last_chunk);
-    printf("last_chunk: name %s (%d)\n", last_chunk->name, last_chunk->size);
 
     printf("\nACF: %s\n", filename);
-    printf("File size: %d\n", file_size / 1024 / 1024);
+    printf("File size: %d\n", file_size / 1024);
 
     while (current_chunk < last_chunk) {
+        system_events(&state->system);
+
         enum chunk_type_e chunk_type = CHUNK_TYPE_UNKNOWN;
         print_chunk_name(current_chunk);
 
@@ -795,14 +825,6 @@ void acf_play(const u8 *filename) {
         else if (memcmp("SoundFrm", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SOUNDFRM;
         else if (memcmp("SoundEnd", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SOUNDEND;
         else if (memcmp("End     ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_END;
-        // else if (memcmp("NulChunk", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_NULCHUNK;
-        // else if (memcmp("FrameLen", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_FRAMELEN;
-        // else if (memcmp("SAL_STRT", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_STRT;
-        // else if (memcmp("SAL_PART", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_PART;
-        // else if (memcmp("SAL_END ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_END;
-        // else if (memcmp("SAL_COMP", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_SAL_COMP;
-        // else if (memcmp("Recouvre", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_COVERS;
-        // else if (memcmp("Camera  ", current_chunk->name, 8) == 0) chunk_type = CHUNK_TYPE_CAMERA;
 
         if (chunk_type == CHUNK_TYPE_END) {
             break;
@@ -814,34 +836,26 @@ void acf_play(const u8 *filename) {
         switch (chunk_type) {
             case CHUNK_TYPE_FORMAT:
                 format = (format_t*)(data_ptr);
-                printf("Struct Size: %d\n", format->struct_size);
-                printf("Width: %d\n", format->width);
-                printf("Height: %d\n", format->height);
-                printf("Frame size: %d\n", format->frame_size);
-                printf("Key size: %d\n", format->key_size);
-                printf("Key rate: %d\n", format->key_rate);
-                printf("Play rate: %d\n", format->play_rate);
-                printf("Sampling rate: %d\n", format->sampling_rate);
-                printf("Sample type: %d\n", format->sample_type);
-                printf("Sample flags: %d\n", format->sample_flags);
-                printf("Compressor: %d\n", format->compressor);
+                // printf("Struct Size: %d\n", format->struct_size);
+                // printf("Width: %d\n", format->width);
+                // printf("Height: %d\n", format->height);
+                // printf("Frame size: %d\n", format->frame_size);
+                // printf("Key size: %d\n", format->key_size);
+                // printf("Key rate: %d\n", format->key_rate);
+                // printf("Play rate: %d\n", format->play_rate);
+                // printf("Sampling rate: %d\n", format->sampling_rate);
+                // printf("Sample type: %d\n", format->sample_type);
+                // printf("Sample flags: %d\n", format->sample_flags);
+                // printf("Compressor: %d\n", format->compressor);
                 break;
             case CHUNK_TYPE_PALETTE:
-                palette = (palette_t*)(data_ptr);
-                break;
-            case CHUNK_TYPE_FRAMELEN:
-                frame_len = (frame_len_t*)(data_ptr);
-                printf("Biggest frame size: %d\n", frame_len->biggest_frame_size);
-                printf("Frame size in sectors: %d\n", frame_len->frame_size_in_sectors);
-                break;
-            case CHUNK_TYPE_CAMERA:
-                camera = (camera_t*)(data_ptr);
-                printf("Camera: x=%d y=%d z=%d target_x=%d target_y=%d target_z=%d roll=%d fov=%d\n", camera->x, camera->y, camera->z, camera->target_x, camera->target_y, camera->target_z, camera->roll, camera->fov);
+                memccpy(palette, data_ptr, 1, current_chunk->size);
+                system_set_palette(&state->system, (u8 *)palette);
                 break;
             case CHUNK_TYPE_KEYFRAME:
             case CHUNK_TYPE_DLTFRAME:
                 frame_data_t* frame_data = (frame_data_t*)(data_ptr);
-                decompreess_frame(frame_data);
+                decompreess_frame(state, frame_data);
                 break;
             case CHUNK_TYPE_SOUNDBUF:
                 // u8 *sound_buffer = (u8*)malloc(current_chunk->size);
@@ -853,32 +867,13 @@ void acf_play(const u8 *filename) {
                 break;
             case CHUNK_TYPE_SOUNDEND:
                 break;
-            // case CHUNK_TYPE_COVERS:
-            //     break;
-            // case CHUNK_TYPE_SAL_STRT:
-            //     break;
-            // case CHUNK_TYPE_SAL_PART:
-            //     break;
-            // case CHUNK_TYPE_SAL_END:
-            //     break;
-            // case CHUNK_TYPE_SAL_COMP:
-            //     break;
-            case CHUNK_TYPE_NULCHUNK:
-                break;
-            default:
-                printf("Unknown chunk type \n");
-                break;
         }
-        printf("%p\n", current_chunk);
         current_chunk = (chunk_t*)((u8*)current_chunk + sizeof(chunk_t) + current_chunk->size);
-        printf("%p\n", current_chunk);
+
+        if (format) {
+            system_delay_events(&state->system, 1000 / format->play_rate);
+        }
     }
-    free(previous_buffer);
-    free(previous_frame_buffer);
-    free(previous_tile);
-    // if (current_buffer) {
-    //     free(current_buffer);
-    // }
-    free(current_tile);
+    free(current_buffer);
     free(file_ptr);
 }

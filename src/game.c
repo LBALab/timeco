@@ -61,7 +61,7 @@ void game_introduction() {
 
     switch(state->game_type) {
         case TIMECO_US:
-            acf_play((const u8 *)ACF_ACTIVISION);
+            acf_play(state, (const u8 *)ACF_ACTIVISION);
             break;
         case TIMECO_JP:
         case TIMECO_ASIA:
@@ -77,10 +77,10 @@ void game_introduction() {
     // switch(state->game_type) {
     //     case TIMECO_DEMO:
     //     case TIMECO_MCAFEE_DEMO:
-    //         acf_play((const u8 *)ACF_TUNNEL);
+    //         acf_play(state, (const u8 *)ACF_TUNNEL);
     //         break;
     //     default:
-    //         acf_play((const u8 *)ACF_INTRO);
+    //         acf_play(state, (const u8 *)ACF_INTRO);
     //         break;
     // }
 
