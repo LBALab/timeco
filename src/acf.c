@@ -115,8 +115,8 @@ u8* previous_tile;
 u8* current_buffer;
 u8* current_tile;
 
-u8* aligned_stream = NULL;
-u8* unaligned_stream = NULL;
+const u8* aligned_stream = NULL;
+const u8* unaligned_stream = NULL;
 
 
 
@@ -204,39 +204,39 @@ void motion_8_decode() {
 }
 
 void motion_4_decode() {
-    block_copy_4x4(current_tile, previous_frame_buffer + read_u16(aligned_stream));
-    block_copy_4x4(current_tile + 4, previous_frame_buffer + read_u16(aligned_stream));
-    block_copy_4x4(current_tile + frame_width * 4, previous_frame_buffer + read_u16(aligned_stream));
-    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_frame_buffer + read_u16(aligned_stream));
+    block_copy_4x4(current_tile, previous_frame_buffer + read_u16(&aligned_stream));
+    block_copy_4x4(current_tile + 4, previous_frame_buffer + read_u16(&aligned_stream));
+    block_copy_4x4(current_tile + frame_width * 4, previous_frame_buffer + read_u16(&aligned_stream));
+    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_frame_buffer + read_u16(&aligned_stream));
 }
 
 void ro_motion_8_decode() {
-    block_copy_8x8(current_tile, previous_tile + read_s16(unaligned_stream) + 4 + frame_width * 4);
+    block_copy_8x8(current_tile, previous_tile + read_s16(&unaligned_stream) + 4 + frame_width * 4);
 }
 
 void ro_motion_4_decode() {
-    block_copy_4x4(current_tile, previous_tile + read_s16(aligned_stream) + 2 + frame_width * 2);
-    block_copy_4x4(current_tile + 4, previous_tile + 4 + read_s16(aligned_stream) + 2 + frame_width * 2);
-    block_copy_4x4(current_tile + frame_width * 4, previous_tile + frame_width * 4 + read_s16(aligned_stream) + 2 + frame_width * 2);
-    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_tile + frame_width * 4 + 4 + read_s16(aligned_stream) + 2 + frame_width * 2);
+    block_copy_4x4(current_tile, previous_tile + read_s16(&aligned_stream) + 2 + frame_width * 2);
+    block_copy_4x4(current_tile + 4, previous_tile + 4 + read_s16(&aligned_stream) + 2 + frame_width * 2);
+    block_copy_4x4(current_tile + frame_width * 4, previous_tile + frame_width * 4 + read_s16(&aligned_stream) + 2 + frame_width * 2);
+    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_tile + frame_width * 4 + 4 + read_s16(&aligned_stream) + 2 + frame_width * 2);
 }
 
 void rc_motion_8_decode() {
-    block_copy_8x8(current_tile, previous_tile + read_xy_offset(unaligned_stream,frame_width) + 4 + frame_width * 4);
+    block_copy_8x8(current_tile, previous_tile + read_xy_offset(&unaligned_stream,frame_width) + 4 + frame_width * 4);
 }
 
 void rc_motion_4_decode() {
-    block_copy_4x4(current_tile, previous_tile + read_xy_offset(aligned_stream, frame_width) + 2 + frame_width * 2);
-    block_copy_4x4(current_tile + 4, previous_tile + read_xy_offset(aligned_stream, frame_width) + 2 + frame_width * 2 + 4);
-    block_copy_4x4(current_tile + frame_width * 4, previous_tile + read_xy_offset(aligned_stream, frame_width) + 2 + frame_width * 2 + frame_width * 4);
-    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_tile + read_xy_offset(aligned_stream, frame_width) + 2 + frame_width * 2 + frame_width * 4 + 4);
+    block_copy_4x4(current_tile, previous_tile + read_xy_offset(&aligned_stream, frame_width) + 2 + frame_width * 2);
+    block_copy_4x4(current_tile + 4, previous_tile + read_xy_offset(&aligned_stream, frame_width) + 2 + frame_width * 2 + 4);
+    block_copy_4x4(current_tile + frame_width * 4, previous_tile + read_xy_offset(&aligned_stream, frame_width) + 2 + frame_width * 2 + frame_width * 4);
+    block_copy_4x4(current_tile + frame_width * 4 + 4, previous_tile + read_xy_offset(&aligned_stream, frame_width) + 2 + frame_width * 2 + frame_width * 4 + 4);
 }
 
 // load one byte, apply it to the entire tile
 void single_colour_fill_decode() {
     u8 colour_tile = *unaligned_stream++;
     for (i32 y = 0; y < 8; y++) {
-        memset(current_tile + y * frame_width, colour_tile, 8);
+        memset(current_tile + (y * frame_width), colour_tile, 8);
     }
 }
 
@@ -248,10 +248,10 @@ void four_color_fill_decode() {
     u8 colour_bottom_right = *aligned_stream++;
 
     for (i32 y = 0; y < 4; y++) {
-      memset(current_tile + y * frame_width, colour_top_left, 4);
-      memset(current_tile + y * frame_width + 4, colour_top_right, 4);
-      memset(current_tile + (y + 4) * frame_width, colour_bottom_left, 4);
-      memset(current_tile + (y + 4) * frame_width + 4, colour_bottom_right, 4);
+      memset(current_tile + (y * frame_width), colour_top_left, 4);
+      memset(current_tile + (y * frame_width) + 4, colour_top_right, 4);
+      memset(current_tile + ((y + 4) * frame_width), colour_bottom_left, 4);
+      memset(current_tile + ((y + 4) * frame_width) + 4, colour_bottom_right, 4);
     }
 }
 
@@ -290,7 +290,7 @@ void two_bit_tile_decode() {
 // - 8 octets colour (palette index)
 void three_bit_tile_decode() {
     for (i32 y = 0; y < 8; y++) {
-        u32 a = read_u32(aligned_stream, 3);
+        u32 a = read_u32(&aligned_stream, 3);
         for (i32 x = 0; x < 8; x++) {
             set_pixel(x, y, unaligned_stream[a & 7]);
             a >>= 3;
@@ -304,7 +304,7 @@ void three_bit_tile_decode() {
 // - 16 octets colour (palette index)
 void four_bit_tile_decode() {
     for (i32 y = 0; y < 8; y++) {
-        u32 a = read_u32(aligned_stream, 4);
+        u32 a = read_u32(&aligned_stream, 4);
         for (i32 x = 0; x < 8; x++) {
             set_pixel(x, y, unaligned_stream[a & 15]);
             a >>= 4;
@@ -316,7 +316,7 @@ void four_bit_tile_decode() {
 void one_bit_split_tile_decode() {
     for (u32 i = 0; i < 4; i++) {
         u32 offset = split_tile_offsets[i];
-        u16 a = read_u16(aligned_stream);
+        u16 a = read_u16(&aligned_stream);
         for (i32 y = 0; y < 4; y++) {
             for (i32 x = 0; x < 4; x++) {
                 current_tile[x + y * frame_width + offset] = aligned_stream[a & 1];
@@ -330,7 +330,7 @@ void one_bit_split_tile_decode() {
 void two_bit_split_tile_decode() {
     for (u32 i = 0; i < 4; i++) {
         u32 offset = split_tile_offsets[i];
-        u32 a = read_u32(aligned_stream, 4);
+        u32 a = read_u32(&aligned_stream, 4);
         for (i32 y = 0; y < 4; y++) {
             for (i32 x = 0; x < 4; x++) {
                 current_tile[x + y * frame_width + offset] = aligned_stream[a & 3];
@@ -347,7 +347,7 @@ void three_bit_split_tile_decode() {
         u32 a;
         for (i32 y = 0; y < 4; y++) {
             if (!(y & 1)) {
-                a = read_u32(aligned_stream, 3);
+                a = read_u32(&aligned_stream, 3);
             }
             for (i32 x = 0; x < 4; x++) {
                 current_tile[x + y * frame_width + offset] = unaligned_stream[a & 7];
@@ -362,7 +362,7 @@ void three_bit_split_tile_decode() {
 // - 4 octets (Couleurs de base)
 // - 16 octets (4x4) pour indiquer les correspondances.
 void cross_decode() {
-    u32 value = read_u32(aligned_stream, 4);
+    u32 value = read_u32(&aligned_stream, 4);
     for (u32 i = 0; i < 4; i++) {
         u32 offset = split_tile_offsets[i];
         u8* dest = current_tile + offset;
@@ -415,7 +415,7 @@ void prime_decode() {
 // All 64 colors to directly copy to the buffer
 void raw_tile_decode() {
     for (i32 y = 0; y < 8; y++) {
-        memcpy(current_tile + y * frame_width, aligned_stream, 8);
+        memcpy(current_tile + (y * frame_width), aligned_stream, 8);
         aligned_stream += 8;
     }
 }
@@ -651,14 +651,14 @@ void decompress_frame(state_t *state, frame_data_t *frame_data) {
     previous_tile = previous_frame_buffer = previous_buffer;
     current_tile = current_buffer;
 
-    unaligned_stream = (u8*)frame_data + frame_data->colour_offset;
-    aligned_stream = (u8*)frame_data->opcodes + (frame_height / 8) * 30;
+    unaligned_stream = ((u8*)frame_data) + frame_data->colour_offset;
+    aligned_stream = ((u8*)frame_data->opcodes) + (frame_height / 8) * 30;
 
     i32 opcode = -1;
     const u8* opcode_ptr = frame_data->opcodes;
 
-    for (i32 y = 0; y < frame_height / 8; y++) {
-        for (i32 x = 0; x < frame_width / 8; x++) {
+    for (i32 y = 0; y < (frame_height / 8); y++) {
+        for (i32 x = 0; x < (frame_width / 8); x++) {
             if (opcode == -1) {
                 opcode = ((*(i32*)opcode_ptr) | 0xff000000);
                 opcode_ptr += 3;
@@ -788,14 +788,13 @@ void acf_play(state_t *state, const u8 *filename) {
         exit(1);
     }
     i32 file_size = frsize(&fr);
-    file_ptr = (u8*)malloc(file_size * sizeof(u8));
+    file_ptr = (u8*)malloc(file_size);
     frread(&fr, file_ptr, file_size);
     frclose(&fr);
 
     frame_number = 0;
-    current_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    previous_buffer = (u8 *)malloc(frame_width * frame_height * sizeof(u8));
-    current_tile = current_buffer;
+    current_buffer = (u8 *)malloc((size_t)frame_width * (size_t)frame_height * sizeof(u8));
+    previous_buffer = (u8 *)malloc((size_t)frame_width * (size_t)frame_height * sizeof(u8));
 
     current_chunk = (chunk_t*)file_ptr;
     chunk_t *last_chunk = (chunk_t*)(file_ptr + file_size);
@@ -832,8 +831,15 @@ void acf_play(state_t *state, const u8 *filename) {
         switch (chunk_type) {
             case CHUNK_TYPE_FORMAT:
                 format = (format_t*)(data_ptr);
-                memset(current_buffer, 0, frame_width * frame_height);
-                memset(previous_buffer, 0, frame_width * frame_height);
+                frame_width = format->width;
+                frame_height = format->height;
+                memset(current_buffer, 0, (size_t)frame_width * (size_t)frame_height * sizeof(u8));
+                memset(previous_buffer, 0, (size_t)frame_width * (size_t)frame_height * sizeof(u8));
+                // if (current_buffer) free(current_buffer);
+                // if (previous_buffer) free(previous_buffer);
+                // current_buffer = (u8 *)malloc((size_t)frame_width * (size_t)frame_height * sizeof(u8));
+                // previous_buffer = (u8 *)malloc((size_t)frame_width * (size_t)frame_height * sizeof(u8));
+                // current_tile = current_buffer;
                 if(format->play_rate) {
                     play_rate = format->play_rate;
                 }
@@ -850,13 +856,12 @@ void acf_play(state_t *state, const u8 *filename) {
                 printf("Compressor: %d\n", format->compressor);
                 break;
             case CHUNK_TYPE_PALETTE:
-                memccpy(palette, data_ptr, 1, current_chunk->size);
+                memcpy(palette, data_ptr, (size_t)current_chunk->size);
                 system_set_palette(&state->system, (u8 *)palette);
                 break;
             case CHUNK_TYPE_KEYFRAME:
             case CHUNK_TYPE_DLTFRAME:
-                frame_data_t* frame_data = (frame_data_t*)(data_ptr);
-                decompress_frame(state, frame_data);
+                decompress_frame(state, (frame_data_t*)(data_ptr));
                 break;
             case CHUNK_TYPE_SOUNDBUF:
                 // u8 *sound_buffer = (u8*)malloc(current_chunk->size);
@@ -867,6 +872,8 @@ void acf_play(state_t *state, const u8 *filename) {
             case CHUNK_TYPE_SOUNDFRM:
                 break;
             case CHUNK_TYPE_SOUNDEND:
+                break;
+            default:
                 break;
         }
         current_chunk = (chunk_t*)((u8*)current_chunk + sizeof(chunk_t) + current_chunk->size);

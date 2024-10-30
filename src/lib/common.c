@@ -85,25 +85,25 @@ inline f32 max(f32 a, f32 b) {
 }
 
 
-u16 read_u16(const u8* ptr) {
+u16 read_u16(const u8** ptr) {
     u16 value = (*(u16*)(ptr));
     ptr += 2;
     return value;
 }
 
-i16 read_s16(const u8* ptr) {
+i16 read_s16(const u8** ptr) {
     i16 value = (*(i16*)(ptr));
     ptr += 2;
     return value;
 }
 
-u32 read_u32(const u8* ptr, int skip) {
+u32 read_u32(const u8** ptr, int skip) {
     u32 value = (*(u32*)(ptr));
     ptr += skip;
     return value;
 }
 
-i16 read_xy_offset(const u8* ptr, int stride) {
+i16 read_xy_offset(const u8** ptr, int stride) {
     i16 value = (*(int8_t*)(ptr)) + (*(int8_t*)(ptr + 1)) * stride / 2;
     ptr += 2;
     return value;
