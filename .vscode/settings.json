@@ -8,6 +8,12 @@
         "optional": "c",
         "unordered_map": "c",
         "file_reader.h": "c",
-        "platform_mixer.h": "c"
+        "platform_mixer.h": "c",
+        "compare": "c",
+        "cstdint": "c",
+        "cstddef": "cpp",
+        "stdlib.h": "c",
+        "debug_font.h": "c",
+        "chrono": "c"
     }
 }

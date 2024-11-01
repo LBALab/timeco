@@ -70,7 +70,7 @@ inline void swap_u8(u8 *a, u8 *b) {
     *a = temp;
 }
 
-inline void swap_u8_ptr(u8 **a, u8 **b) {
+inline void swap_u8_ptr(uint8_t **a, uint8_t **b) {
     u8 *temp = *b;
     *b = *a;
     *a = temp;
@@ -82,29 +82,4 @@ inline f32 min(f32 a, f32 b) {
 
 inline f32 max(f32 a, f32 b) {
     return a > b ? a : b;
-}
-
-
-u16 read_u16(const u8** ptr) {
-    u16 value = (*(u16*)(ptr));
-    ptr += 2;
-    return value;
-}
-
-i16 read_s16(const u8** ptr) {
-    i16 value = (*(i16*)(ptr));
-    ptr += 2;
-    return value;
-}
-
-u32 read_u32(const u8** ptr, int skip) {
-    u32 value = (*(u32*)(ptr));
-    ptr += skip;
-    return value;
-}
-
-i16 read_xy_offset(const u8** ptr, int stride) {
-    i16 value = (*(int8_t*)(ptr)) + (*(int8_t*)(ptr + 1)) * stride / 2;
-    ptr += 2;
-    return value;
 }
