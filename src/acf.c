@@ -668,17 +668,23 @@ void block_bank_1_decode_3() {
 void scale_2x(state_t *state) {
     u8* source = (u8*)current_buffer;
     u8* dest = (u8*)state->screen.back_buffer;
-
+    i32 offset = 0;
+    if (frame_height != 240) {
+        offset = ((240 - frame_height) * 640);
+    }
     // scale 2x current buffer of 320x240 to 640x480
     for (int y = 0; y < 240; ++y) {
         for (int x = 0; x < 320; ++x) {
             u8 pixel = source[y * 320 + x];
-            int dest_index = (y * 2 * 640) + (x * 2);
+            int dest_index = (y * 2 * 640) + (x * 2) + offset;
 
             dest[dest_index] = pixel;
             dest[dest_index + 1] = pixel;
             memcpy(dest + dest_index + 640, dest + dest_index, 2);
         }
+    }
+    if (frame_height != 240) {
+        memset(dest + (640*480) - offset, 0, offset);
     }
 }
 
