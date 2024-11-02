@@ -28,10 +28,10 @@ void system_mixer_init(i32 sound_config) {
         exit(1);
     }
     
-    // if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
-    //     printf("Mix_Init: %s\n", SDL_GetError());
-    //     exit(1);
-    // }
+    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
+        printf("Mix_Init: %s\n", SDL_GetError());
+        exit(1);
+    }
 
     Mix_AllocateChannels(32);
 }
@@ -120,7 +120,9 @@ i32 system_mixer_free_music() {
 
 i32 system_mixer_play_music(u8 *music_ptr, i32 music_size, i32 loop) {
     system_mixer_load_music(music_ptr, music_size);
-    return Mix_PlayMusic(current_track, loop);
+    if (!Mix_PlayMusic(current_track, loop)) {
+        printf("Mix_PlayMusic: %s\n", SDL_GetError());
+    }
 }
 
 i32 system_mixer_play_music_mp3(c8 *music_file) {

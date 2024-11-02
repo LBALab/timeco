@@ -8,6 +8,7 @@
 #include "game_detection.h"
 #include "renderer.h"
 #include "sample.h"
+#include "music.h"
 #include "acf.h"
 
 
@@ -22,6 +23,8 @@
 #define HQR_SCREEN_TIMEWRAP     46
 #define HQR_SCREEN_TIMECO_DEMO  50
 #define HQR_SCREEN_VIRGIN       54
+
+#define MENU_TRACK              2
 
 #define ACF_ACTIVISION          "SEQUENCE/ACTIVISI.ACF"
 #define ACF_INTRO               "SEQUENCE/BIGINTRO.ACF"
@@ -85,8 +88,10 @@ void game_introduction() {
     }
 
     // then menu > new game > then timewrap acf
-    game_image(state, HQR_SCREEN_MENU, 0, TRUE);
+    music_play_track(MENU_TRACK);
+    game_image(state, HQR_SCREEN_MENU, 30000, TRUE);
 
+    // sample test
     u8 *menu_samples = NULL;
     if (!hqr_get_entry_alloc(&menu_samples, HQR_RESSOURCE, HQR_MENU_SAMPLES)) {
         printf("Error: Couldn't load palette %d\n", HQR_MENU_SAMPLES);
