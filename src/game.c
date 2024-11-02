@@ -99,6 +99,13 @@ void game_introduction() {
     sample_play_hidden(0, menu_samples, 22050, 0, 0);
     sample_play_hidden(1, menu_samples, 22050, 0, 0);
     memory_free(menu_samples);
+
+    screen_clear_back_buffer(&state->screen);
+    screen_clear(&state->screen);
+
+    music_stop();
+    music_play_midi(0, 0, 15, 1);
+    acf_play(state, (const u8 *)"stage00/run0/scene.acf");
 }
 
 void game_release(state_t *state) {
