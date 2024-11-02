@@ -102,6 +102,9 @@ void game_introduction() {
 }
 
 void game_release(state_t *state) {
+    sample_stop_all();
+    music_stop_track();
+    music_stop_midi();
 }
 
 void game_fps(screen_t *screen, timer_t *timer) {
