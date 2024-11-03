@@ -53,6 +53,7 @@ inline void system_delay(u32 ms) {
 
 void system_delay_events(system_t *system, u32 ms) {
     u32 start = system_tick();
+    memset(&system->actions, false, sizeof(system->actions));
     while (system_tick() - start < ms) {
         if (system->actions[ACTION_SKIP] || system->quit) {
             break;
