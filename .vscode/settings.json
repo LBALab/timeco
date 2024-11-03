@@ -15,6 +15,7 @@
         "stdlib.h": "c",
         "debug_font.h": "c",
         "chrono": "c",
-        "locale": "c"
+        "locale": "c",
+        "system_error": "c"
     }
 }

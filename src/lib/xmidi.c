@@ -721,8 +721,10 @@ static i32 read_XMIDI_header(u8* data, u32 size, struct XMIDI_info* info)
                 pos += (len + 1) & ~1;
                 ++tracksRead;
             } else {
-                //warning("Hit invalid block '%c%c%c%c' while scanning for track locations", pos[0], pos[1], pos[2], pos[3]);
-                return 0;
+                printf("xmidi: invalid block '%c%c%c%c' while scanning for track locations", pos[0], pos[1], pos[2], pos[3]);
+                pos += 4;
+                len = read4high(&pos);
+                pos += (len + 1) & ~1;
             }
         }
 

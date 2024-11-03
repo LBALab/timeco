@@ -28,7 +28,7 @@ void system_mixer_init(i32 sound_config) {
         exit(1);
     }
     
-    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
+    if (Mix_Init(MIX_INIT_MID | MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
         printf("Mix_Init: %s\n", SDL_GetError());
         exit(1);
     }
@@ -102,6 +102,7 @@ void system_mixer_music_fade_out(i32 ms) {
 
 inline void system_mixer_load_music(u8 *music_ptr, i32 music_size) {
     SDL_IOStream *rw = SDL_IOFromMem(music_ptr, music_size);
+    printf("IOStream: %p\n", rw);
     if (current_track != NULL) {
         Mix_FreeMusic(current_track);
     }
@@ -120,13 +121,15 @@ i32 system_mixer_free_music() {
 
 i32 system_mixer_play_music(u8 *music_ptr, i32 music_size, i32 loop) {
     system_mixer_load_music(music_ptr, music_size);
-    if (!Mix_PlayMusic(current_track, loop)) {
+    i32 error_code = Mix_PlayMusic(current_track, loop);
+    if (!error_code) {
         printf("Mix_PlayMusic: %s\n", SDL_GetError());
     }
+    return error_code;
 }
 
 i32 system_mixer_play_music_mp3(c8 *music_file) {
-    int error_code = 0;
+    i32 error_code = 0;
     current_track = Mix_LoadMUS(music_file);
     if (current_track == NULL) {
         printf("Mix_LoadMUS: %s\n", SDL_GetError());
