@@ -104,7 +104,7 @@ void game_introduction() {
     screen_clear(&state->screen);
 
     music_stop();
-    music_play_midi(0, 0, 15, 1);
+    music_play_midi(0, 0, 16, 1);
     acf_play(state, (const u8 *)"stage00/run0/scene.acf");
 }
 

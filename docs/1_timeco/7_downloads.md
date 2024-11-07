@@ -20,10 +20,16 @@ permalink: /time-commando/downloads
 
 [US English Manual]({{ site.baseurl }}/assets/manuals/manual_english_us.pdf)
 
+[ASIA English Manual]({{ site.baseurl }}/assets/manuals/manual_english_asia.pdf)
+
 [Portuguese & Spanish Manual]({{ site.baseurl }}/assets/manuals/manual_portuguese_spanish.pdf)
+
+[Japanese Manual]({{ site.baseurl }}/assets/manuals/manual_japanese.pdf)
+
+[PSX Japanese Manual]({{ site.baseurl }}/assets/manuals/manual_japanese_psx.pdf)
 
 ## Reference Sheets
 
-[Keyboard Reference Sheet]({{ site.baseurl }}/assets/manuals/keyboard_reference_sheet.jpg)
+[Keyboard Reference Sheet]({{ site.baseurl }}/assets/manuals/tc-keyboard-reference.pdf)
 
-[Screen Refereence Sheet]({{ site.baseurl }}/assets/manuals/screen_reference_sheet.jpg)
+[Screen Refereence Sheet]({{ site.baseurl }}/assets/manuals/tc-ui.pdf)

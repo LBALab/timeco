@@ -44,6 +44,15 @@ images:
 - image_path: assets/images/covers/cd_expert_br.png
   title: CD Expert BR
   link: assets/images/covers/cd_expert_br.png
+- image_path: assets/images/covers/tc-pc-jp-box-front.png
+  title: Time Commando PC JP Box Front
+  link: assets/images/covers/tc-pc-jp-box-front.png
+- image_path: assets/images/covers/tc-pc-jp-box-back.png
+  title: Time Commando PC JP Box Back
+  link: assets/images/covers/tc-pc-jp-box-back.png
+- image_path: assets/images/covers/tc-pc-jp-cd.png
+  title: Time Commando PC JP CD
+  link: assets/images/covers/tc-pc-jp-cd.png
 ---
 
 # Covers

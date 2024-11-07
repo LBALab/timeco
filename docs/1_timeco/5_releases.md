@@ -15,6 +15,13 @@ permalink: /time-commando/releases
 1. TOC
 {:toc}
 
+<a href="{{ site.baseurl }}/assets/images/covers/box_various_pc.jpeg" style="margin: 6px; display: inline-flex; border-radius: 15px; border: 1px solid #80808042; padding: 5px;">
+    <img src="{{ site.baseurl }}/assets/images/covers/box_various_pc.jpeg" alt="Various PC Box" style="border-radius: 10px" />
+</a>
+
+<a href="{{ site.baseurl }}/assets/images/covers/box_various_psx.jpeg" style="margin: 6px; display: inline-flex; border-radius: 15px; border: 1px solid #80808042; padding: 5px;">
+    <img src="{{ site.baseurl }}/assets/images/covers/box_various_psx.jpeg" alt="Various PSX Box" style="border-radius: 10px" />
+</a>
 
 ## PC DOS & Windows 95
 ### 1996 Release
