@@ -7,6 +7,7 @@
 #include "lib/debug_font.h"
 
 #include "acf.h"
+#include "sample.h"
 
 // based on:
 // https://blog.defence-force.org/index.php?page=articles&ref=ART82
@@ -874,20 +875,6 @@ void acf_play(state_t *state, const u8 *filename) {
                 frame_height = format->height;
                 memset(current_buffer, 0, (size_t)frame_width * (size_t)frame_height * sizeof(u8));
                 memset(previous_buffer, 0, (size_t)frame_width * (size_t)frame_height * sizeof(u8));
-                // if(format->play_rate) {
-                //     play_rate = format->play_rate;
-                // }
-                // printf("Struct Size: %d\n", format->struct_size);
-                // printf("Width: %d\n", format->width);
-                // printf("Height: %d\n", format->height);
-                // printf("Frame size: %d\n", format->frame_size);
-                // printf("Key size: %d\n", format->key_size);
-                // printf("Key rate: %d\n", format->key_rate);
-                // printf("Play rate: %d\n", format->play_rate);
-                // printf("Sampling rate: %d\n", format->sampling_rate);
-                // printf("Sample type: %d\n", format->sample_type);
-                // printf("Sample flags: %d\n", format->sample_flags);
-                // printf("Compressor: %d\n", format->compressor);
                 break;
             case CHUNK_TYPE_PALETTE:
                 memcpy(palette, data_ptr, (size_t)current_chunk->size);
@@ -898,12 +885,20 @@ void acf_play(state_t *state, const u8 *filename) {
                 decompress_frame(state, (frame_data_t*)(data_ptr));
                 break;
             case CHUNK_TYPE_SOUNDBUF:
-                // u8 *sound_buffer = (u8*)malloc(current_chunk->size);
-                // memcpy(sound_buffer, data_ptr, current_chunk->size);
+                u8 *sound_buffer = (u8*)malloc(current_chunk->size);
+                printf("Sound buffer Chunk Size: %d", current_chunk->size);
+                memcpy(sound_buffer, data_ptr, current_chunk->size);
+                i32 index = 0;
+                sample_play_ptr(index, sound_buffer, current_chunk->size, 22050, 0, 0);
                 // printf("Sound buffer size: %d\n", current_chunk->size);
                 // printf("Sound buffer: %s\n", sound_buffer);
                 break;
             case CHUNK_TYPE_SOUNDFRM:
+                i32 index1 = 0;
+                u8 *sound_buffer1 = (u8*)malloc(current_chunk->size);
+                printf("Sound buffer Chunk Size: %d", current_chunk->size);
+                memcpy(sound_buffer1, data_ptr, current_chunk->size);
+                sample_play_ptr(index1, sound_buffer1, current_chunk->size, 22050, 0, 0);
                 break;
             case CHUNK_TYPE_SOUNDEND:
                 break;

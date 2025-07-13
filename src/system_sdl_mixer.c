@@ -68,7 +68,11 @@ inline void system_mixer_free() {
 
 i32 system_mixer_play(u8 *sample_ptr, i32 samples_size, i32 channel_index, i32 loop) {
     system_mixer_load(sample_ptr, samples_size);
-    return Mix_PlayChannel(channel_index, chunk, 0);
+    i32 error_code = Mix_PlayChannel(channel_index, chunk, 0);
+    if (error_code) {
+        printf("Mix_PlayChannel: %s\n", SDL_GetError());
+    }
+    return error_code;
 }
 
 inline void system_mixer_resume() {
