@@ -35,7 +35,6 @@ Special Thanks to:
 * Didier Chanfray for creating Time Commando and providing concept art and sketches;
 * Mickael Pointier and it's blog for providing in-depth technical details about the game engine and history of Adeline;
 * Magicball Network and el_muerte for magazine and cover scans borrowed;
-* neoxaero for providing a bunch of content and details about the game;
 * phoenix for providing Brazilian Portuguese manual scans;
 * xesf for collecting and creating this documentation and starting the reimplementation project;
 
